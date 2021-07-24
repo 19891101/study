@@ -1,0 +1,10 @@
+
+TexStudio 安裝:
+1 运行一下命令:
+  sudo apt-get install texlive
+  sudo apt-get install texlive-xetex
+  sudo apt-get install texlive-lang-chinese
+  sudo apt-get install texstudio
+2 打开TexStudio, Options->ConfigTexStudio->Completion,　勾选CJK以及xe开始的选项, 然后选择ok
+3 Options->ConfigTexStudio->Build, 将Default Compiler选为XeLateX
+

@@ -1,0 +1,622 @@
+\documentclass{article}
+\usepackage{xeCJK}
+\usepackage{amsmath}
+\usepackage{listings}
+\usepackage{xcolor}
+\setlength{\parindent}{0pt}
+\renewcommand{\baselinestretch}{1.0}
+\lstset{
+	frame=tb, % draw a frame at the top and bottom of the code block
+	showstringspaces=false, % don't mark spaces in strings
+	numbers=left, % display line numbers on the left
+	commentstyle=\color{green}, % comment color
+	keywordstyle=\color{blue}, % keyword color
+	stringstyle=\color{red} % string color
+}
+\usepackage[a4paper,left=20mm,right=20mm,top=15mm,bottom=15mm]{geometry}  
+
+\title{sed}
+\author{MengChunlei}
+
+\linespread{1.2}
+\begin{document}
+\maketitle
+\section{基本用法}
+sed全称是stream editor.简单说,它是按照行来处理文本的一个工具. 本文将按照以下12个部分来总结它的用法: \par
+\begin{itemize}
+	\item 替换
+	\item 地址使用
+	\item 删除
+	\item 插入
+    \item 整行替换和转换
+	\item 打印
+	\item 读写文件
+	\item 多行用法
+	\item 空间保持和排除命令
+	\item 流改变
+	\item 模式替代
+	\item 用例示范
+\end{itemize}
+
+\section{替换}
+替换的命令: s/origin/replacement/. 多个替换命令可以串联, 用分号隔开. \par
+\begin{lstlisting}[language=bash, caption={Substitution}]
+[chunleimeng]$ echo "hello world" | sed 's/hello/Hello/'
+Hello world
+[chunleimeng]$ cat file1 
+The quick brown fox jumps over the lazy dog.
+The quick brown fox jumps over the lazy dog.
+The quick brown fox jumps over the lazy dog.
+The quick brown fox jumps over the lazy dog.
+[chunleimeng]$ sed -e 's/brown/green/; s/dog/cat/' file1 
+The quick green fox jumps over the lazy cat.
+The quick green fox jumps over the lazy cat.
+The quick green fox jumps over the lazy cat.
+The quick green fox jumps over the lazy cat.
+[chunleimeng]$
+\end{lstlisting}
+命令可以放在一个文件里面. 也可以用$-e$以写在多行上.
+\begin{lstlisting}[language=bash, caption={Substitution}]
+[chunleimeng]$ cat script1.sed 
+s/brown/green/
+s/dog/cat/
+[chunleimeng]$ sed -f script1.sed file1 
+The quick green fox jumps over the lazy cat.
+The quick green fox jumps over the lazy cat.
+The quick green fox jumps over the lazy cat.
+The quick green fox jumps over the lazy cat.
+[chunleimeng]$ sed -e '
+> s/brown/green/
+> s/dog/cat/' file1
+The quick green fox jumps over the lazy cat.
+The quick green fox jumps over the lazy cat.
+The quick green fox jumps over the lazy cat.
+The quick green fox jumps over the lazy cat.
+\end{lstlisting}
+替换还有四种控制:
+\begin{itemize}
+	\item 数字, 替换第几处
+	\item g, 全部替换
+	\item p, 打印替换的行
+	\item w file, 将替换的结果写到文件
+\end{itemize}
+\begin{lstlisting}[language=bash, caption={Substitution}]
+[chunleimeng]$ cat file2
+this is test a test
+this is test
+no key
+[chunleimeng]$ sed 's/test/new/' file2  /*默认替换第一次出现的地方*/
+this is new a test
+this is new
+no key
+[chunleimeng]$ sed 's/test/new/2' file2 /*替换第二次出现的地方*/
+this is test a new
+this is test
+no key
+[chunleimeng]$ sed 's/test/new/g' file2
+this is new a new
+this is new
+no key
+[chunleimeng]$ sed -n 's/test/new/p' file2  /*-n表示不产生输出*/
+this is new a test
+this is new
+[chunleimeng]$ sed -n 's/test/new/2p' file2
+this is test a new
+[chunleimeng]$ sed -n 's/test/new/w result.txt' file2
+[chunleimeng]$ cat result.txt 
+this is new a test
+this is new
+\end{lstlisting}
+
+\section{地址使用}
+如果只想把命令作用于某些行或者不作用于某些行, 需要使用地址.有两种方式: \par
+\begin{itemize}
+	\item 以数字表示区间
+	\item 用本文模式找到特定的行
+\end{itemize}
+~\\
+使用数字表示区间的样例: \par
+\begin{lstlisting}[language=bash, caption={Address}]
+[chunleimeng]$ sed '2s/dog/cat/' file1  /*只替换第二行*/
+The quick brown fox jumps over the lazy dog.
+The quick brown fox jumps over the lazy cat.
+The quick brown fox jumps over the lazy dog.
+The quick brown fox jumps over the lazy dog.
+[chunleimeng]$ sed '2,3s/dog/cat/' file1 /*替换第二行到第三行*/
+The quick brown fox jumps over the lazy dog.
+The quick brown fox jumps over the lazy cat.
+The quick brown fox jumps over the lazy cat.
+The quick brown fox jumps over the lazy dog.
+[chunleimeng]$ sed '2,$s/dog/cat/' file1 /*替换第二行到最后一行*/
+The quick brown fox jumps over the lazy dog.
+The quick brown fox jumps over the lazy cat.
+The quick brown fox jumps over the lazy cat.
+The quick brown fox jumps over the lazy cat.
+[chunleimeng]$ sed '2{
+> s/fox/elephant/
+> s/dog/cat/}' file1
+The quick brown fox jumps over the lazy dog.
+The quick brown elephant jumps over the lazy cat.
+The quick brown fox jumps over the lazy dog.
+The quick brown fox jumps over the lazy dog.
+[chunleimeng]$
+\end{lstlisting}
+\par
+~\\
+使用文本模式示例: \par
+\begin{lstlisting}[language=bash, caption={Address}]
+[chunleimeng]$ cat file2
+this is test a test
+this is test
+no key
+[chunleimeng]$ sed '/test a/s/test/abc/g' file2
+this is abc a abc
+this is test
+no key
+[chunleimeng]$
+\end{lstlisting}
+
+
+\section{删除}
+删除的命令是d. \par
+\begin{lstlisting}[language=bash, caption={Delete}]
+[chunleimeng]$ cat file3
+this is line number 1
+this is line number 2
+this is line number 3
+this is line number 4
+this is line number 1 again
+line six
+line seven
+[chunleimeng]$ sed 'd' file3  /*删除所有行*/
+[chunleimeng]$ sed '3d' file3 /*删除第三行*/
+this is line number 1
+this is line number 2
+this is line number 4
+this is line number 1 again
+line six
+line seven
+[chunleimeng]$ sed '3,$d' file3 /*删除第三行到结尾*/
+this is line number 1
+this is line number 2
+[chunleimeng]$ sed '/number 1/d' file3 /*删除包含'number 1' 的行*/
+this is line number 2
+this is line number 3
+this is line number 4
+line six
+line seven
+[chunleimeng]$ sed '/1/,/3/d' file3 /*删除包含1的行到包含3的行. 数字1第二次出现的时候没有*/
+this is line number 4               /*对应的3的行,所以后面的都删除了*/
+\end{lstlisting}
+\section{插入}
+插入有两种, i表示在指定行前面插入, a表示在指定行后面插入. \par
+\begin{lstlisting}[language=bash, caption={Insert}]
+[chunleimeng]$ cat file4 
+this is line number 1
+this is line number 2
+[chunleimeng]$ sed '2i\insert line' file4 /*在第二行前面插入*/
+this is line number 1
+insert line
+this is line number 2
+[chunleimeng]$ sed '$a\insert line' file4 /*在最后一行后面插入*/
+this is line number 1
+this is line number 2
+insert line
+[chunleimeng]$ sed '2i\   /*插入多行*/
+> insert line1\
+> insert line2' file4
+this is line number 1
+insert line1
+insert line2
+this is line number 2
+\end{lstlisting}
+\section{整行替换和转换}
+整行替换的命令是c. \par
+\begin{lstlisting}[language=bash, caption={Change}]
+[chunleimeng]$ cat file3
+this is line number 1
+this is line number 2
+this is line number 3
+this is line number 4
+this is line number 1 again
+line six
+line seven
+[chunleimeng]$ sed '3c\changed line' file3  /*替换第三行*/
+this is line number 1
+this is line number 2
+changed line
+this is line number 4
+this is line number 1 again
+line six
+line seven
+[chunleimeng]$ sed '/number 1/c\changed line' file3 /*替换包含'number 1'的行*/
+changed line
+this is line number 2
+this is line number 3
+this is line number 4
+changed line
+line six
+line seven
+[chunleimeng]$ sed '2,3c\changed line' file3 /*替换第2行到第3行*/
+this is line number 1
+changed line
+this is line number 4
+this is line number 1 again
+line six
+line seven
+\end{lstlisting}
+转换的命令是: y/inchars/outchars, 其中inchars和outchars要一样长.它会把每一个inchars替换为对应的outchars. \par
+\begin{lstlisting}[language=bash, caption={Transform}]
+[chunleimeng]$ sed 'y/123/789/' file3
+this is line number 7
+this is line number 8
+this is line number 9
+this is line number 4
+this is line number 7 again
+line six
+line seven
+[chunleimeng]$ echo '111222333' | sed 'y/123/789/'  /*会替换所有的字符*/
+777888999
+\end{lstlisting}
+\section{打印}
+控制打印的有三个命令:
+\begin{itemize}
+	\item p, 打印本文行
+	\item =, 打印行号
+	\item l, 列出行
+\end{itemize}
+\begin{lstlisting}[language=bash, caption={Print}]
+[chunleimeng]$ cat file5
+this is line number 1
+this is line number 2
+this is line number 3
+this is line number 4
+[chunleimeng]$ sed -n '/number 3/p' file5
+this is line number 3
+[chunleimeng]$ sed -n '2,3p' file5
+this is line number 2
+this is line number 3
+[chunleimeng]$ sed -n '/3/{
+> p
+> s/line/test/p
+> }' file5
+this is line number 3
+this is test number 3
+[chunleimeng]$ sed '=' file5
+1
+this is line number 1
+2
+this is line number 2
+3
+this is line number 3
+4
+this is line number 4
+[chunleimeng]$ sed -n '/number 4/{
+> =
+> p
+> }' file5
+4
+this is line number 4 
+[chunleimeng]$ cat file6
+tag	test	end
+[chunleimeng]$ sed -n 'l' file6 /*tab会显示为\t*/
+tag\ttest\tend$
+[chunleimeng]$
+\end{lstlisting}
+
+\section{读写文件}
+\begin{itemize}
+	\item w, 写文件
+	\item r, 读文件
+\end{itemize}
+\begin{lstlisting}[language=bash, caption={File}]
+[chunleimeng]$ cat file5
+this is line number 1
+this is line number 2
+this is line number 3
+this is line number 4
+[chunleimeng]$ sed '1,2w result.txt' file5
+this is line number 1
+this is line number 2
+this is line number 3
+this is line number 4
+[chunleimeng]$ cat result.txt 
+this is line number 1
+this is line number 2
+[chunleimeng]$ cat file7
+insert line1
+insert line2
+[chunleimeng]$ sed '3r file7' file5 /*将file7中的内容插入第三行后*/
+this is line number 1
+this is line number 2
+this is line number 3
+insert line1
+insert line2
+this is line number 4
+[chunleimeng]$ sed '$r file7' file5
+this is line number 1
+this is line number 2
+this is line number 3
+this is line number 4
+insert line1
+insert line2
+\end{lstlisting}
+
+\section{多行用法}
+
+\begin{itemize}
+	\item next命令
+	\item 多行删除
+	\item 多行打印
+\end{itemize}
+next命令有两种,小写n表示移动到下一行,大写N表示将下一行的内容附加到当前行的后面. \par
+\begin{lstlisting}[language=bash, caption={next-n}]
+[chunleimeng]$ cat file8
+first line
+second line
+third line
+forth line
+[chunleimeng]$ sed '/first/{n ; d}' file8 /*删除first行的后面一行*/
+first line
+third line
+forth line
+[chunleimeng]$
+\end{lstlisting}
+\begin{lstlisting}[language=bash, caption={next-N}]
+[chunleimeng]$ cat file9
+first line hello
+world second line
+third line
+abc hello world ef
+we hello world
+[chunleimeng]$ sed 'N; s/hello world/HELLO WORLD/' file9 /*可以发现, 第一行第二行换行的*/
+first line hello                                         /*hello world没有替换成功*/
+world second line
+third line
+abc HELLO WORLD ef
+we hello world
+[chunleimeng]$ sed 'N; s/hello.world/HELLO WORLD/' file9 /*上面的问题解决了, 但是第一行*/
+first line HELLO WORLD second line                       /*第二行合并了*/
+third line
+abc HELLO WORLD ef
+we hello world
+[chunleimeng]$ sed '                 /*分两种情况处理.问题是最后一行没有成功.因为没有*/
+> N                                  /*下一行, 所以N命令失败了, 从而结束. 后面一节会*/
+> s/hello\nworld/HELLO\nWORLD/       /*解决这个问题*/
+> s/hello world/HELLO WORLD/' file9
+first line HELLO
+WORLD second line
+third line
+abc HELLO WORLD ef
+we hello world
+\end{lstlisting}
+接下来是多行删除. 命令是D. \par
+\begin{lstlisting}[language=bash, caption={Delete-D}]
+[chunleimeng]$ cat file9
+first line hello
+world second line
+third line
+abc hello world ef
+we hello world
+[chunleimeng]$ sed 'N; /hello.world/d' file9 /*文件的第1-2行删除了一次,第3-4行删除了一次*/
+we hello world
+[chunleimeng]$ sed 'N; /hello.world/D' file9 /*删除目标串所在行的前一行*/
+world second line
+third line
+we hello world
+\end{lstlisting}
+接下来是多行打印. \par
+\begin{lstlisting}[language=bash, caption={Print}]
+[chunleimeng]$ sed -n 'N; /hello\nworld/p' file9 /*打印合并后的所有*/
+first line hello
+world second line
+[chunleimeng]$ sed -n 'N; /hello\nworld/P' file9 /*打印前面一行*/
+first line hello
+[chunleimeng]$
+\end{lstlisting}
+
+\section{空间保持和排除命令}
+sed命令工作的空间称作模式空间,还有一块缓冲区叫做保持空间.有一些命令可以在这两个之间交换数据: \par
+\begin{itemize}
+	\item h: 从模式空间复制到保持空间
+	\item H: 将模式空间附加到保持空间
+	\item g: 从保持空间复制到模式空间
+	\item G: 将保持空间附加到模式空间
+	\item x: 交换模式空间和保持空间
+\end{itemize}
+\begin{lstlisting}[language=bash, caption={Hold Space}]
+[chunleimeng]$ cat file9
+first line hello
+world second line
+third line
+abc hello world ef
+we hello world
+[chunleimeng]$ sed -n '/first/{h; n; p; g; p}' file9 /*先打印first行的下一行*/
+world second line                                    /*再打印first行*/
+first line hello
+\end{lstlisting}
+排除命令是感叹号!, 它表示相反的操作. \par
+\begin{lstlisting}[language=bash, caption={Negate}]
+[chunleimeng]$ cat file9
+first line hello
+world second line
+third line
+abc hello world ef
+we hello world
+[chunleimeng]$ sed -n '/hello/!p' file9 /*包含hello的行不输出*/
+world second line
+third line
+[chunleimeng]$ sed '$!N                /*最后一行不执行N操作*/
+> s/hello\nworld/HELLO\nWORLD/
+> s/hello world/HELLO WORLD/' file9
+first line HELLO
+WORLD second line
+third line
+abc HELLO WORLD ef
+we HELLO WORLD
+[chunleimeng]$ sed -n '{1!G; h; $p}' file9  /*倒序输出文件:*/
+we hello world                              /*    1: 第一行不执行G操作*/
+abc hello world ef                          /*    2: 到最后一行的时候才执行p操作*/
+third line
+world second line
+first line hello
+
+\end{lstlisting}
+
+\section{流改变}
+正常的执行规则对于文本的每一行,顺序执行脚本中的每个命令.流改变的意思是可以改变这个规则,包括两个命令,一个命令类似C语言的goto, 即满足某个条件的话会跳转到某个地方去执行之后的命令; 另一个也是类似goto, 不过不是某个条件成立, 而是之前的命令执行成功时跳转.第一个命令是b,第二个命令是t. \par
+\begin{lstlisting}[language=bash, caption={Stream Change-b}]
+[chunleimeng]$ cat file9
+first line hello
+world second line
+third line
+abc hello world ef
+we hello world
+[chunleimeng]$ 
+[chunleimeng]$ sed '2,3b; s/world/WORLD/' file9  /*第2-3行直接跳转到脚本的最后*/
+first line hello                                 /*其他行不跳转, 去执行后面的替换命令*/
+world second line
+third line
+abc hello WORLD ef
+we hello WORLD
+[chunleimeng]$ sed '/hello/b label; s/world/WORLD/; :label s/hello/HELLO/' file9
+first line HELLO                      /*包含hello的行跳转到label去替换hello*/
+WORLD second line                     /*不包含hello的会顺序执行所有的命令*/
+third line
+abc HELLO world ef
+we HELLO world
+[chunleimeng]$ echo "this, is, a, test, to, remove, commas" | sed -n '
+:start
+s/,//1p             /*去掉逗号并打印*/
+/,/b start'         /*替换后还有逗号就跳转,否则结束*/
+this is, a, test, to, remove, commas
+this is a, test, to, remove, commas
+this is a test, to, remove, commas
+this is a test to, remove, commas
+this is a test to remove, commas
+this is a test to remove commas 
+[chunleimeng]$ sed '
+> s/hello/HELLO/                  /*替换hello成功, 则跳转到脚本最后*/
+> t                               /*否则不跳转, 替换world*/
+> s/world/WORLD/' file9
+first line HELLO
+WORLD second line
+third line
+abc HELLO world ef
+we HELLO world
+[chunleimeng]$ echo "this, is, a, test, to, remove, commas" | sed -n '
+:start
+s/,//1p
+t start'          /*替换逗号成功则跳转到start*/
+this is, a, test, to, remove, commas
+this is a, test, to, remove, commas
+this is a test, to, remove, commas
+this is a test to, remove, commas
+this is a test to remove, commas
+this is a test to remove commas
+\end{lstlisting}
+
+\section{模式替代}
+这个跟正则表达式中的反向引用类似, 就是使用匹配的模式. \par
+\begin{lstlisting}[language=bash, caption={Stream Change-b}]
+[chunleimeng]$ echo 'The cat sleeps in his hat' | sed 's/\(.at\)/"\1"/g'
+The "cat" sleeps in his "hat"   /*将cat和hat加上引号*/
+[chunleimeng]$ echo 'abc def ghij afc' | sed 's/a\(.\)c/XX\1XX/g'
+XXbXX def ghij XXfXX  /*将abc和afc两边替换成XX*/
+[chunleimeng]$ echo '1234567' | sed '    /*三个一组加上逗号*/
+> :start
+> s/\(.*[0-9]\)\([0-9]\{3\}\)/\1,\2/
+> t start'
+1,234,567
+\end{lstlisting}
+
+\section{用例示范}
+\begin{lstlisting}[language=bash, caption={Example}]
+[chunleimeng]$ cat file1
+The quick brown fox jumps over the lazy dog.
+The quick brown fox jumps over the lazy dog.
+The quick brown fox jumps over the lazy dog.
+The quick brown fox jumps over the lazy dog.
+[chunleimeng]$ sed '$!G' file1  /*每一行后面加入空行, 除了最后一行外*/
+The quick brown fox jumps over the lazy dog.
+
+The quick brown fox jumps over the lazy dog.
+
+The quick brown fox jumps over the lazy dog.
+
+The quick brown fox jumps over the lazy dog.
+[chunleimeng]$ sed '=' file1 | sed 'N; s/\n/ /' /*给每一行编号*/
+1 The quick brown fox jumps over the lazy dog.
+2 The quick brown fox jumps over the lazy dog.
+3 The quick brown fox jumps over the lazy dog.
+4 The quick brown fox jumps over the lazy dog. 
+[chunleimeng]$ cat file10
+this is line 1
+this is line 2
+this is line 3
+this is line 4
+this is line 5
+this is line 6
+this is line 7
+this is line 8
+this is line 9
+this is line 10
+this is line 11
+this is line 12
+this is line 13
+this is line 14
+this is line 15
+[chunleimeng]$ sed ':start   /*打印最后6行*/
+> $q; N; 7,$D                /*$q是说到最后一行退出*/
+> b start' file10            /*7,$D是说当前在第6行之后就删掉模式空间的第一行*/
+this is line 10
+this is line 11
+this is line 12
+this is line 13
+this is line 14
+this is line 15
+[chunleimeng]$ cat file11
+first line
+
+second line
+
+
+third line
+
+last line
+
+[chunleimeng]$ sed '/./,/^$/!d' file11 /*删掉连续的空白行*/
+first line
+
+second line
+
+third line
+
+last line
+
+[chunleimeng]$ sed '/./,$!d' file11  /*删掉开头的空白行*/
+first line
+
+second line
+
+
+third line
+
+last line
+
+[chunleimeng]$ sed '{   /*删掉结尾的空白行*/
+> :start
+> /^\n*$/{$d; N; b start}
+> }' file11
+first line
+
+second line
+
+
+third line
+
+last line
+\end{lstlisting}
+
+\end{document}
+

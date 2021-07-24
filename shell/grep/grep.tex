@@ -1,0 +1,198 @@
+\documentclass{article}
+\usepackage{xeCJK}
+\usepackage{amsmath}
+\usepackage{listings}
+\usepackage{xcolor}
+\setlength{\parindent}{0pt}
+\renewcommand{\baselinestretch}{1.0}
+\lstset{
+	frame=tb, % draw a frame at the top and bottom of the code block
+	showstringspaces=false, % don't mark spaces in strings
+	numbers=left, % display line numbers on the left
+	commentstyle=\color{green}, % comment color
+	keywordstyle=\color{blue}, % keyword color
+	stringstyle=\color{red} % string color
+}
+\usepackage[a4paper,left=20mm,right=20mm,top=15mm,bottom=15mm]{geometry}  
+
+\title{grep}
+\author{MengChunlei}
+
+\begin{document}
+\maketitle
+\section{基本用法}
+\begin{lstlisting}[language=bash]
+mcl@mcl: cat file1 
+bhishek 20 cc 11
+chitransh 102 vv 20
+zzz 8 zz 10
+zzz 8 yy 7
+zzz 8 bb 20
+xyz 77 aa 12
+satish 103 ff 100
+satish 103 ff 1
+mcl@mcl: grep zzz file1  /*查找含有zzz的行*/
+zzz 8 zz 10
+zzz 8 yy 7
+zzz 8 bb 20
+mcl@mcl: grep -n zzz file1 /*输出中带有行号*/
+3:zzz 8 zz 10
+4:zzz 8 yy 7
+5:zzz 8 bb 20
+mcl@mcl: grep -v zzz file1 /*查找不含有zzz的行*/
+bhishek 20 cc 11
+chitransh 102 vv 20
+xyz 77 aa 12
+satish 103 ff 100
+satish 103 ff 1
+mcl@mcl: grep -c zzz file1  /*统计行数*/
+3
+mcl@mcl: cat file2 
+my name is mcl
+haha
+My NAME is mcl
+mcl@mcl: grep -i name file2  /*忽略大小写*/
+my name is mcl
+My NAME is mcl
+mcl@mcl: grep -q zzz file1 /*-q不输出，但是可以利用其返回值进行条件判断*/
+mcl@mcl: echo $?
+0
+mcl@mcl: grep -q xxxx file1 
+mcl@mcl: echo $?
+1
+
+\end{lstlisting}
+
+\section{环顾功能}
+\begin{lstlisting}[language=bash]
+mcl@mcl: cat file3 
+start
+first LINE
+second line
+third LINE
+last line
+END
+mcl@mcl: grep -A 1 LINE file3 /*输出匹配行的后面一行*/
+first LINE
+second line
+third LINE
+last line
+mcl@mcl: grep -B 1 LINE file3　/*输出匹配行的前面一行*/
+start
+first LINE
+second line
+third LINE
+mcl@mcl: grep -C 1 LINE file3 /*输出匹配行的前后各一行*/
+start
+first LINE
+second line
+third LINE
+last line
+\end{lstlisting}
+
+\section{多文件}
+\begin{lstlisting}[language=bash]
+mcl@mcl: ls
+file1  file2  file3
+mcl@mcl: grep -l name file*　　/*输出含有name的文件*/
+file2
+mcl@mcl: grep -L name file* /*输出不含有name的文件*/
+file1
+file3
+mcl@mcl: echo "aaa" > file1
+mcl@mcl: echo "bbb" > file2
+mcl@mcl: echo "aaa" > file3
+mcl@mcl: ls
+file1  file2  file3
+mcl@mcl: grep "aaa" file* -lZ 
+file1file3mcl@mcl: 
+mcl@mcl: 
+mcl@mcl: grep "aaa" file* -lZ | xargs -0 /*可以将这些文件列出在一行*/
+file1 file3
+mcl@mcl: grep "aaa" file* -lZ | xargs -0 rm 
+mcl@mcl: ls
+file2
+
+\end{lstlisting}
+
+\section{正则表达式}
+\begin{lstlisting}[language=bash]
+mcl@mcl: cat file4
+a test
+test it
+last test again
+mcl@mcl: grep '^test' file4 /*查找有test开头的行*/
+test it
+mcl@mcl: grep 'test$' file4 /*查找有test结尾的行*/
+a test
+mcl@mcl: grep 'test$|^test' file4
+mcl@mcl: grep -E 'test$|^test' file4 /*查找有test开头或者结尾的行*/
+a test
+test it
+mcl@mcl: egrep 'test$|^test' file4　/*查找有test开头或者结尾的行，可以直接用egrep*/
+a test
+test it
+\end{lstlisting}
+
+\section{按照单词查找}
+\begin{lstlisting}[language=bash]
+mcl@mcl: cat file5
+i love you
+it glove it
+mcl@mcl: grep love file5
+i love you
+it glove it
+mcl@mcl: grep -w love file5 /*w选项可以只查找单词*/
+i love you
+\end{lstlisting}
+
+\section{目录查找}
+\begin{lstlisting}[language=bash]
+mcl@mcl: tree project/
+project/
+├── a.h
+├── b.h
+├── common
+│   └── c.h
+└── README.txt
+
+1 directory, 4 files
+mcl@mcl: cat project/a.h 
+void print(int x);
+mcl@mcl: cat project/b.h 
+int add(int x, int y) {
+  return x + y;
+}
+void print(double t);
+mcl@mcl: cat project/README.txt 
+print
+add
+mcl@mcl: cat project/common/c.h 
+void print(char c);
+mcl@mcl: grep -r print project/  /*在project下面的所有文件中查找print*/
+project/README.txt:print
+project/common/c.h:void print(char c);
+project/a.h:void print(int x);
+project/b.h:void print(double t);
+mcl@mcl: grep -r print project --include=*.h /*只在.h文件中查找*/
+project/common/c.h:void print(char c);
+project/a.h:void print(int x);
+project/b.h:void print(double t);
+mcl@mcl: grep -r print project --include=*.txt /*只在.txt文件中查找*/
+project/README.txt:print
+mcl@mcl: grep -r print project --include=*.{txt,h} /*在.txt或者.h文件中查找*/
+project/README.txt:print
+project/common/c.h:void print(char c);
+project/a.h:void print(int x);
+project/b.h:void print(double t);
+mcl@mcl: grep -r print project --exclude=*.txt /*排除.txt文件*/
+project/common/c.h:void print(char c);
+project/a.h:void print(int x);
+project/b.h:void print(double t);
+mcl@mcl: grep -r print project --exclude-dir=common/ /*排除common文件夹*/
+project/README.txt:print
+project/a.h:void print(int x);
+project/b.h:void print(double t);
+\end{lstlisting}
+
+\end{document}
