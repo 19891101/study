@@ -1,0 +1,43 @@
+\documentclass[onecolumn]{article}
+\usepackage{xeCJK}
+\usepackage{amsmath}
+\usepackage{listings}
+\usepackage{xcolor}
+\setlength{\parindent}{0pt}
+\renewcommand{\baselinestretch}{1.0}
+\lstset{
+	frame=tb, % draw a frame at the top and bottom of the code block
+	showstringspaces=false, % don't mark spaces in strings
+	numbers=left, % display line numbers on the left
+	commentstyle=\color{green}, % comment color
+	keywordstyle=\color{blue}, % keyword color
+	stringstyle=\color{red} % string color
+}
+\usepackage[a4paper,left=20mm,right=20mm,top=15mm,bottom=15mm]{geometry}  
+
+
+\begin{document}
+1、当$n=2$时，区间$[2,n-1]$为空，所以当$n=2$时不能证明2匹马颜色相同。\par
+~\\
+2、三根柱子ABC。假设$n$个盘子的答案为$f(n)$.最后一个盘子一定是A->C->B，所以整个过程分为5步:
+（1） 将上面$n-1$个盘子从A->C->B,即$f(n-1)$; \par 
+（2）将第$n$个盘子放到C上；  \par 
+ (3）将B上的$n-1$个盘子通过C移动到A,即$f(n-1)$; \par 
+ （4）将C上的第$n$个盘子移动到B； \par 
+ （5）最后将A上的$n-1$个盘子移动到B，即$f(n-1)$。 \par 
+ 所以$f(n)=3f(n-1)+2, f(1)=2$,所以$f(n)=3^{n}-1$. \par 
+~\\
+
+3、三根柱子的证明是类似的。下面只证明第一根柱子。数学归纳法：
+（1）当$n=1$时，很明显，第一个柱子上出现过$2^1=2$种一个盘子的排列。 \par 
+（2）假设$[1,n-1]$时，都满足情况； \par 
+（3）对于$n$ 个盘子的情况，在第二题的第一步开始到第一步结束过程中，第一根柱子上出现过$n-1$个盘子的所有排列，此时有第$n$个盘子；在第二题的第五步开始到结束，第一根柱子上仍然出现过$n-1$个盘子的所有排列，此时没有第$n$个盘子。所以所有$n$个盘子的排列都出现过。
+\par ~\\
+
+4、数学归纳法：\par
+（1）$n=1$时显然有$g(1) \le 2^{1}-1=1$ \par 
+（2）假设$[1,n-1]$个都满足 \par 
+（3）对于$n$个盘子，假设它在第三根上，那么$g(n)=g(n-1)$;否则假设它在第二根柱子上，那么可以将其他的$n-1$个先移动到第一根柱子上，需要$g(n-1)$，然后将第$n$个盘子移动到第三根上，然后再把第一根柱子上的$n-1$个盘子移动到第三根上，需要$2^{n-1}-1$步，所以$g(n)=g(n-1)+1+2^{n-1}-1 \le 2^{n-1}-1+1+2^{n-1}-1=2^{n}-1$ \par
+所以不存在这样的排列。
+\par ~\\
+\end{document}
