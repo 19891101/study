@@ -1,0 +1,37 @@
+\documentclass[onecolumn]{article}
+\usepackage{xeCJK}
+\usepackage{amsmath}
+\usepackage{listings}
+\usepackage{xcolor}
+\setlength{\parindent}{0pt}
+\renewcommand{\baselinestretch}{1.0}
+\lstset{
+	frame=tb, % draw a frame at the top and bottom of the code block
+	showstringspaces=false, % don't mark spaces in strings
+	numbers=left, % display line numbers on the left
+	commentstyle=\color{green}, % comment color
+	keywordstyle=\color{blue}, % keyword color
+	stringstyle=\color{red} % string color
+}
+\usepackage[a4paper,left=20mm,right=20mm,top=15mm,bottom=15mm]{geometry}  
+
+
+\begin{document}
+１、下面的是下界，上面的是上界，所以这个取值范围为空，答案应该是０ \par
+~\\
+２、$|x|$ \par
+~\\
+３、$\sum_{0\leq k\leq 5}a_{k}=a_{0}+a_{1}+a_{2}+a_{3}+a_{4}+a_{5}$ \par
+$\sum_{0\leq k^{2}\leq 5}a_{k^{2}}=\sum_{k=-2}^{2}a_{k^{2}}=a_{4}+a_{1}+a_{0}+a_{1}+a_{4}$ \par
+~\\
+4、$\sum_{1\leq i<j<k\leq 4}a_{ijk}=\sum_{i=1}^{2}\sum_{j=i+1}^{3}\sum_{k=j+1}^{4}a_{ijk}=((a_{123}+a_{124})+a_{134})+a_{234}$\par
+
+$\sum_{1\leq i<j<k\leq 4}a_{ijk}=\sum_{k=3}^{4}\sum_{j=2}^{k-1}\sum_{i=1}^{j-1}a_{ijk}=a_{123}+(a_{124}+(a_{134}+a_{234}))$\par
+~\\
+5、两个求和符号用了同样的下标符号，其实它们是不同的，所以不能约分。\par
+~\\
+6、$[1\leq j\leq n](n-j+1)$\par
+~\\
+7、$mx^{\overline{m-1}}$\par
+~\\
+\end{document}
