@@ -34,4 +34,91 @@ $\sum_{1\leq i<j<k\leq 4}a_{ijk}=\sum_{k=3}^{4}\sum_{j=2}^{k-1}\sum_{i=1}^{j-1}a
 ~\\
 7、$mx^{\overline{m-1}}$\par
 ~\\
+8、当$m>0$时，为0;当$m=0$为1;当$m<0$时为$\frac{1}{|m|!}$\par
+~\\
+9、$x^{\overline{m+n}}=x^{\overline{m}}(x+m)^{\overline{n}}$。令$m=-n$可以得到:$x^{\overline{-n}}=\frac{1}{(x-n)^{\overline{n}}}=\frac{1}{(x-1)^{\underline{b}}}$ \par
+~\\
+10、$u\Delta v+E_{v}\Delta u=v\Delta u+E_{u}\Delta v$,这样就对称了。\par
+~\\
+11、$a_{n}b_{n}-a_{0}b_{0}-\sum_{0\leq k < n}a_{k+1}(b_{k+1}-b_{k})$\par
+$=a_{n}b_{n}-a_{0}b_{0}-\sum_{0\leq k < n}a_{k+1}b_{k+1}+\sum_{0\leq k < n}a_{k+1}b_{k}$\par
+$=a_{n}b_{n}-a_{0}b_{0}-\sum_{1\leq k \leq n}a_{k}b_{k}+\sum_{0\leq k < n}a_{k+1}b_{k}$\par
+$=-\sum_{0\leq k < n}a_{k}b_{k}+\sum_{0\leq k < n}a_{k+1}b_{k}$\par
+$=\sum_{0\leq k < n}(a_{k+1}-a_{k})b_{k}$\par
+~\\
+12、从两点证明：\par
+\begin{itemize}
+	\item 对于两个不同的$k_{1},k_{2}$,$p(k_{1})\ne p(k_{2})$
+	\item 对于一个整数$n$,一定存在一个整数$k$,满足$p(k)=n$.如果$k$是奇数，那么$p(2t+1)=2t+1-c$,和跟$c$的奇偶性相反;如果$k$是偶数，那么$p(2t)=2t-c$，和跟$c$的奇偶性相同。这两个里面一定会存在一个等于$n$
+\end{itemize}
+~\\
+13、令$R_{0}=\alpha,R_{n}=R_{n-1}+(-1)^{n}(\beta+\gamma n+\delta n^{2})$,所以$R_{n}=A(n)\alpha+B(n)\beta+C_{n}\gamma +D_{n}\delta $ \par
+(1)令$R_{n}=1$可以得到:$\alpha=1,\beta=\gamma =\delta =0$,所以$A_{n}=1$ \par
+(2)令$R_{n}=(-1)^{n}$，可以得到:$\alpha=1,\beta=2,\gamma=\delta=0$,所以$A(n)+2B(n)=(-1)^{n}$ \par
+(3)令$R_{n}=(-1)^{n}n$,可以得到:$-B(n)+2C(n)=(-1)^{n}n$ \par
+(4)令$R_{n}=(-1)^{n}n^{2}$，可以得到:$B(n)-2C(n)+2D(n)=(-1)^{n}n^{2}$. \par
+令$\alpha=\beta=\gamma=0,\delta=1,R_{n}=(-1)^{n}n^{2}$,那么有:\par
+\begin{itemize}
+	\item $R_{n}=D(n)$
+	\item $R_{0}=0$
+	\item $R_{1}=(-1)^{1}1^{2}$
+	\item $R_{2}=R_{1}+(-1)^{2}2^{2}=(-1)^{1}1^{2}+(-1)^{2}2^{2}$
+	\item 所以$D(n)=R_{n}=\sum_{k=0}^{n}(-1)^{k}k^{2}$
+\end{itemize}
+因此$\sum_{k=0}^{n}(-1)^{k}k^{2}=D(n)=\frac{(-1)^{n}n^{2}-B(n)+2C(n)}{2}$\par
+$=\frac{(-1)^{n}n^{2}+(-1)^{n}n}{2}=\frac{(-1)^{n}(n^{2}+n)}{2}$\par
+~\\
+14、$\sum_{1\leq j \leq k \leq n}2^{k}$\par
+$=\sum_{1\leq j \leq n}\sum_{j\leq k \leq n}2^{k}$\par
+$=\sum_{1\leq j \leq n}(2^{n+1}-2^{j})$\par
+$=n2^{n+1}-\sum_{1\leq j \leq n}2^{j}$\par
+$=n2^{n+1}-(2^{n+1}-2)$\par
+$=(n-1)2^{n+1}+2$\par
+~\\
+15、$\sum_{k=1}^{n}k^{3}+\sum_{k=1}^{n}k^{2}$ \par
+$=\sum_{k=1}^{n}(k^{3}+k^{2})$\par
+$=\sum_{k=1}^{n}k*k(k+1)$\par
+$=\sum_{k=1}^{n}k\sum_{j=1}^{k}2j$\par
+$=2\sum_{1\leq j \leq k \leq n}jk$\par
+$=\sum_{1\leq j,k \leq n}jk+\sum_{1\leq j=k \leq n}jk=\left (\sum_{1\leq k \leq n}k  \right )^{2}+\sum_{k=1}^{n}k^{2}$\par
+$=(\frac{n(n+1)}{2})^{2}+\sum_{k=1}^{n}k^{2}$\par
+所以$\sum_{k=1}^{n}k^{3}=(\frac{n(n+1)}{2})^{2}$\par
+~\\
+16、$x^{\underline{n}}(x-n)^{\underline{m}}=x^{\underline{m}}(x-m)^{\underline{n}}=x^{\underline{n+m}}$ \par
+~\\
+17、两个式子类似，只证明第一个。首先给出一些总结:\par
+\begin{itemize}
+	\item 当$m>0$时，有$x^{\overline{m}}=x(x+1)(x+2)..(x+m-2)(x+m-1)$
+	\item 当$m=0$时，有$x^{\overline{0}}=1$
+	\item 当$m<0$时，有$x^{\overline{m}}=\frac{1}{(x-1)(x-2)...(x-(|m|-1))(x-|m|)}$
+	\item 当$m>$时，有$x^{\underline{m}}=x(x-1)(x-2)..(x-(m-2))(x-(m-1))$
+	\item 当$m=0$时，有$x^{\underline{0}}=1$
+	\item 当$m<0$时，有$x^{\underline{m}}=\frac{1}{(x+1)(x+2)...(x+(|m|-1))(x+|m|)}$
+\end{itemize}
+ (1)$m=0$时显然都是１ \par
+ (2)$m>0$时，
+\begin{itemize}
+	\item $(-1)^{m}(-x)^{\underline{m}}=(-1)^{m}(-x)(-x-1)(-x-2)...(-x-(m-1))=x(x+1)(x+2)...(x+m-1)=x^{\overline{m}}$
+	\item $(x+m-1)^{\underline{m}}=(x+m-1)(x+m-2)...(x+1)x=x^{\overline{m}}$
+	\item $\frac{1}{(x-1)^{\underline{-m}}}=(x-1+1)(x-1+2)...(x-1+m)=x^{\overline{m}}$
+\end{itemize}
+(3)当$m<0$时，不妨令$m=-m$，
+\begin{itemize}
+	\item $(-1)^{-m}(-x)^{\underline{-m}}=\frac{1}{(-1)^{m}}*\frac{1}{(-x+1)(-x+2)...(-x+m)}=\frac{1}{(x-1)(x-2)(x-3)..(x-m)}=x^{\overline{-m}}$
+	\item $(x-m-1)^{\underline{-m}}=\frac{1}{(x-m-1+1)(x-m-1+2)...(x-m-1+m)}=x^{\overline{-m}}$
+	\item $\frac{1}{(x-1)^{\underline{m}}}=\frac{1}{(x-1)(x-1-1)...(x-1-(m-1))}=x^{\overline{-m}}$
+\end{itemize}
+~\\
+18、
+\begin{itemize}
+	\item $p$: $\sum_{k \in K}a_{k}$绝对收敛
+	\item $q$: 存在有界常数$B$使得任意有限子集$F \in K$有$\sum_{k \in F}|a_{k}| \leq B$
+\end{itemize}
+
+(1) $p\rightarrow q$:\par 
+若$\sum_{k \in K}a_{k}$绝对收敛，那么有$\sum_{k\in K}\Re a_{k},\sum_{k\in K}\Im  a_{k}$分别绝对收敛，而$|a_{k}|\leq (\Re a_{k})^{+}+(\Re a_{k})^{-}+(\Im  a_{k})^{+}+(\Im  a_{k})^{-}$，所以$\sum_{k\in F}|a_{k}|\leq \sum_{k\in F}((\Re a_{k})^{+}+(\Re a_{k})^{-}+(\Im  a_{k})^{+}+(\Im  a_{k})^{-})$，而后者绝对收敛，所以存在有界常数$B$满足条件；\par
+~\\
+(2) $q\rightarrow p$:\par
+由于$(\Re a_{k})^{+}\leq |a_{k}|,(\Re a_{k})^{-}\leq |a_{k}|,(\Im  a_{k})^{+}\leq |a_{k}|,(\Im  a_{k})^{-}\leq |a_{k}|$,所以对于任意的$F$存在有界常数$X,Y,Z,W$使得$\sum_{k\in F}(\Re a_{k})^{+}\leq X,\sum_{k\in F}(\Re a_{k})^{-}\leq Y,\sum_{k\in F}(\Im  a_{k})^{+}\leq Z,\sum_{k\in F}(\Im  a_{k})^{-}\leq W$,所以$\sum_{k\in K}\Re a_{k},\sum_{k\in K}\Im a_{k}$都是绝对收敛的，所以$\sum_{k \in K}a_{k}$绝对收敛 \par
+~\\
 \end{document}
