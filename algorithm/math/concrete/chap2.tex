@@ -109,16 +109,92 @@ $=(\frac{n(n+1)}{2})^{2}+\sum_{k=1}^{n}k^{2}$\par
 	\item $\frac{1}{(x-1)^{\underline{m}}}=\frac{1}{(x-1)(x-1-1)...(x-1-(m-1))}=x^{\overline{-m}}$
 \end{itemize}
 ~\\
-18、
-\begin{itemize}
+18、\begin{itemize}
 	\item $p$: $\sum_{k \in K}a_{k}$绝对收敛
 	\item $q$: 存在有界常数$B$使得任意有限子集$F \in K$有$\sum_{k \in F}|a_{k}| \leq B$
 \end{itemize}
-
 (1) $p\rightarrow q$:\par 
 若$\sum_{k \in K}a_{k}$绝对收敛，那么有$\sum_{k\in K}\Re a_{k},\sum_{k\in K}\Im  a_{k}$分别绝对收敛，而$|a_{k}|\leq (\Re a_{k})^{+}+(\Re a_{k})^{-}+(\Im  a_{k})^{+}+(\Im  a_{k})^{-}$，所以$\sum_{k\in F}|a_{k}|\leq \sum_{k\in F}((\Re a_{k})^{+}+(\Re a_{k})^{-}+(\Im  a_{k})^{+}+(\Im  a_{k})^{-})$，而后者绝对收敛，所以存在有界常数$B$满足条件；\par
-~\\
 (2) $q\rightarrow p$:\par
 由于$(\Re a_{k})^{+}\leq |a_{k}|,(\Re a_{k})^{-}\leq |a_{k}|,(\Im  a_{k})^{+}\leq |a_{k}|,(\Im  a_{k})^{-}\leq |a_{k}|$,所以对于任意的$F$存在有界常数$X,Y,Z,W$使得$\sum_{k\in F}(\Re a_{k})^{+}\leq X,\sum_{k\in F}(\Re a_{k})^{-}\leq Y,\sum_{k\in F}(\Im  a_{k})^{+}\leq Z,\sum_{k\in F}(\Im  a_{k})^{-}\leq W$,所以$\sum_{k\in K}\Re a_{k},\sum_{k\in K}\Im a_{k}$都是绝对收敛的，所以$\sum_{k \in K}a_{k}$绝对收敛 \par
+19、\begin{itemize}
+	\item $a_{n}=2,b_{n}=n$,所以$s_{n}=\frac{a_{1}a_{2}...a_{n-1}}{b_{2}b_{3}...b_{n}}=\frac{2^{n-1}}{n!}$
+	\item 两边同时乘以$s_{n}$得到:$\frac{2^{n}}{n!}T_{n}=\frac{2^{n-1}}{(n-1)!}T_{n-1}+3*2^{n-1}$，$T_{0}=5\rightarrow T_{1}=4$
+	\item 令$P_{n}=\frac{2^{n}}{n!}T_{n}$,那么有$P_{n}=P_{n-1}+3*2^{n-1},P_{1}=8$,所以$P_{n}=3*(2^{n-1}+2^{n-2}+...+2^{1})+8=3*2^{n}+2$
+	\item 所以$T_{n}=(3*2^{n}+2)*\frac{n!}{2^{n}}$，验证可得对于$n=0$也满足条件。
+\end{itemize}
+~\\
+20、$\sum_{k=0}^{n}kH_{k}+(n+1)H_{n+1}$ \par
+$=\sum_{k=0}^{n}(k+1)H_{k+1}$\par
+$=\sum_{k=0}^{n}kH_{k+1}+\sum_{k=0}^{n}H_{k+1}$\par
+$=\sum_{k=0}^{n}k(H_{k}+\frac{1}{k+1})+\sum_{k=0}^{n}(H_{k}+\frac{1}{k+1})$\par
+$=\sum_{k=0}^{n}kH_{k}+\sum_{k=0}^{n}\frac{k}{k+1}+\sum_{k=0}^{n}H_{k}+\sum_{k=0}^{n}\frac{1}{k+1}$\par
+$=\sum_{k=0}^{n}kH_{k}+\sum_{k=0}^{n}H_{k}+n+1$\par
+所以$\sum_{k=0}^{n}H_{k}=(n+1)(H_{n+1}-1)$\par
+~\\
+21、 (1)$S_{n}$的计算: \par
+一方面，$S_{n+1}=\sum_{k=0}^{n+1}(-1)^{n+1-k}=1+\sum_{k=0}^{n}(-1)^{n+1-k}=1-\sum_{k=0}^{n}(-1)^{n-k}=1-S_{n}$\par
+另一方面，$S_{n+1}=\sum_{k=0}^{n+1}(-1)^{n+1-k}=(-1)^{n+1}+\sum_{k=1}^{n+1}(-1)^{n+1-k}=(-1)^{n+1}+\sum_{k=0}^{n}(-1)^{n-k}=(-1)^{n+1}+S_{n}$ \par
+所以$S_{n}=\frac{1+(-1)^{n}}{2}$ \par
+~\\
+(2)$T_{n}$的计算: \par 一方面$T_{n+1}=\sum_{k=0}^{n+1}(-1)^{n+1-k}k=\sum_{k=1}^{n+1}(-1)^{n+1-k}k=\sum_{1\leq k+1\leq n+1}(-1)^{n+1-(k+1)}(k+1)$\par
+$=\sum_{k=0}^{n}(-1)^{n-k}(k+1)=\sum_{k=0}^{n}(-1)^{n-k}k+\sum_{k=0}^{n}(-1)^{n-k}=T_{n}+S_{n}$ \par
+另一方面，$T_{n+1}=\sum_{k=0}^{n+1}(-1)^{n+1-k}k=n+1+\sum_{k=0}^{n}(-1)^{n+1-k}k=n+1-\sum_{k=0}^{n}(-1)^{n-k}k=n+1-T_{n}$ \par
+所以$T_{n}=\frac{n+1-S_{n}}{2}=\frac{2n+1-(-1)^n}{4}$ \par
+~\\
+(3)$U_{n}$的计算：\par
+一方面$U_{n+1}=\sum_{k=0}^{n+1}(-1)^{n+1-k}k^{2}=\sum_{k=1}^{n+1}(-1)^{n+1-k}k^{2}=\sum_{k=0}^{n}(-1)^{n-k}(k+1)^{2}$\par
+$=\sum_{k=0}^{n}(-1)^{n-k}k^{2}+2T_{n}+S_{n}=U_{n}+n+1$\par
+另一方面，$U_{n+1}=\sum_{k=0}^{n+1}(-1)^{n+1-k}k^{2}=(n+1)^{2}+\sum_{k=0}^{n}(-1)^{n+1-k}k^{2}=(n+1)^{2}-U_{n}$ \par
+所以$U_{n}=\frac{n(n+1)}{2}$ \par
+~\\
+22、直接证明下面的一般式: \par
+$\sum_{1\leq j < k \leq n}(a_{j}b_{k}-a_{k}b_{j})(A_{j}B_{k}-A_{k}B_{j})$ \par
+$=\frac{1}{2}\sum_{1\leq j,k \leq n}(a_{j}b_{k}-a_{k}b_{j})(A_{j}B_{k}-A_{k}B_{j})$ \par
+$=\frac{1}{2}\sum_{1\leq j,k \leq  n}(a_{j}b_{k}A_{j}B_{k}-a_{k}b_{j}A_{j}B_{k}-a_{j}b_{k}A_{k}B_{j}+a_{k}b_{j}A_{k}B_{j})$ \par
+$=\sum_{1\leq j,k \leq n}(a_{j}b_{k}A_{j}B_{k}-a_{k}b_{j}A_{j}B_{k})$\par
+$=\left (\sum_{k=1}^{n}a_{k}A_{k}  \right )\left (\sum_{k=1}^{n}b_{k}B_{k}  \right )-\left (\sum_{k=1}^{n}a_{k}B_{k}  \right )\left (\sum_{k=1}^{n}b_{k}A_{k}  \right )$\par
+当$a_{i}=A_{i},b_{i}=B_{i}$时可得到上面的等式 \par
+~\\
+23、(1)$\sum_{k=1}^{n}\frac{2k+1}{k(k+1)}=\sum_{k=1}^{n}\frac{k+(k+1)}{k(k+1)}=\sum_{k=1}^{n}(\frac{1}{k}+\frac{1}{k+1})=2H_{n}-\frac{n}{n+1}$ \par
+(2)令$u(x)=2x+1,\Delta v(x)=\frac{1}{x(x+1)}=(x-1)^{\underline{-2}}$，\par 
+所以$\Delta u(x)=u(x+1)-u(x)=2,v(x)=-(x-1)^{\underline{-1}}=-\frac{1}{x},E_{v}(x)=-\frac{1}{x+1}$,\par
+所以$\sum (2x+1)\frac{1}{x(x+1)}\delta x=(2x+1)(-\frac{1}{x})-\sum (-\frac{2}{x+1})\delta x=-2-\frac{1}{x}+2H_{x}+C$,\par
+所以$\sum_{k=1}^{n}\frac{2k+1}{k(k+1)}$ \par
+$= \sum_{1}^{n+1}(2x+1)\frac{1}{x(x+1)}\delta x$ \par
+$=\left (-2-\frac{1}{x}+2H_{x}  \right )|_{1}^{n+1}$ \par
+$=(-2-\frac{1}{n+1}+2H_{n+1})-(-2-1+2H_{1})=2H_{n}-\frac{n}{n+1}$ \par
+~\\
+24 令$u(x)=H_{x},\Delta v(x)=\frac{1}{(x+1)(x+2)}=x^{\underline{-2}}$，\par
+所以$\Delta u(x)=\frac{1}{x+1},v(x)=-x^{\underline{-1}}=-\frac{1}{x+1}$，\par
+所以$E_{v}(x)=-\frac{1}{x+2}$,\par
+所以$\sum H_{x}\frac{1}{(x+1)(x+2)}\delta x$\par
+$=\sum u_{x}\Delta v_{x}\delta x$\par
+$=u_{x}v_{x}-\sum E_{v}(x)\Delta u_{x}\delta  x$\par
+$=-\frac{H_{x}}{x+1}-\sum (-\frac{1}{x+2})\frac{1}{x+1}\delta  x$\par
+$=-\frac{H_{x}}{x+1}+\sum x^{\underline{-2}}\delta x$\par
+$=-\frac{H_{x}}{x+1}-\frac{1}{x+1}$\par
+$=-\frac{H_{x}+1}{x+1}$\par
+所以$\sum_{0\leq k < n} H_{k}\frac{1}{(k+1)(k+2)}$\par
+$=\left (-\frac{H_{x}+1}{x+1}  \right )|_{0}^{n}$\par
+$=-\frac{H_{n}+1}{n+1}-(-1)=1-\frac{H_{n}+1}{n+1}$\par
+~\\
+25、$\sum_{k\in K}ca_{k}=c\sum_{k\in K}a_{k}\leftrightarrow \prod _{k\in K}a_{k}^{c}=\left (\prod _{k\in K}a_{k}  \right )^{c}$ \par
+$\sum_{k\in K}(a_{k}+b_{k})=\sum_{k\in K}a_{k}+\sum_{k\in K}b_{k}\leftrightarrow \prod _{k\in K}a_{k}b_{k}=\left (\prod _{k\in K}a_{k}  \right )\left (\prod _{k\in K}b_{k}  \right )$ \par
+~\\
+26、$P^{2}=\left (\prod_{1\leq j, k\leq n}a_{j}a_{k}  \right )\left ( \prod _{k=1}^{n}a_{k}^{2} \right )$ \par
+$=\left (\prod_{1\leq k\leq n}a_{k}^{2n}  \right )\left ( \prod _{k=1}^{n}a_{k}^{2} \right )$\par
+$= \prod _{k=1}^{n}a_{k}^{2n+2} \rightarrow P=\prod _{k=1}^{n}a_{k}^{n+1}$\par
+~\\
+27、$\Delta ((-2)^{\underline{x}})$ \par
+$=(-2)^{\underline{x+1}}-(-2)^{\underline{x}}$ \par
+$=(-2-x-1)(-2)^{\underline{x}}$ \par
+$=\frac{(-2)^{\underline{x}}(-2-x)(-2-(x+1))}{(-2-x)}$ \par
+$=-\frac{(-2)^{\underline{x+2}}}{x+2}$ \par
+所以$\Delta (-(-2)^{\underline{x-2}})=\frac{(-2)^{\underline{x}}}{x}$ \par
+所以$\sum \frac{(-2)^{\underline{x}}}{x}\delta x=-(-2)^{\underline{x-2}}$ \par
+所以$\sum_{k=1}^{n} \frac{(-2)^{\underline{k}}}{k}=\left (-(-2)^{\underline{x-2}}  \right  )|_{1}^{n+1}=(-1)^{n}n!-1$ \par
+~\\
+28、不太清楚。\par
 ~\\
 \end{document}
