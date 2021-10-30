@@ -197,4 +197,62 @@ $=-\frac{(-2)^{\underline{x+2}}}{x+2}$ \par
 ~\\
 28、不太清楚。\par
 ~\\
+29 $\sum_{k=1}^{n}\frac{(-1)^{k}k}{4k^{2}-1}$ \par
+$=\frac{1}{4}\sum_{k=1}^{n}(-1)^{k}(\frac{1}{2k-1}+\frac{1}{2k+1})$ \par
+$=\frac{1}{4}(-\frac{1}{1}-\frac{1}{3}+\frac{1}{3}+\frac{1}{5}-\frac{1}{5}-\frac{1}{7}...+\frac{(-1)^{n}}{2n-1}+\frac{(-1)^{n}}{2n+1})$ \par
+$=\frac{1}{4}(-1+\frac{(-1)^{n}}{2n+1})$ \par 
+~\\
+30 
+\begin{itemize}
+	\item 设$n$可以表示成$k$个连续正整数之和，最小的正整数为$a \ge  1$
+	\item 所以$n=\frac{(a+a+k-1)k}{2}$,所以$1 \le 2a-1=\frac{2n}{k}-k$,即$\frac{2n}{k}-k$是个奇数并且大于等于1
+	\item 令$\frac{2n}{k}=X,k=Y$,即$2a-1=X-Y$
+\end{itemize}
+下面的证明分为两步：
+\begin{itemize}
+	\item $X,Y$中有且仅有一个是$n$的奇数因子
+	\item $n$的每一个奇数因子对应一组答案,即一个二元组$(k,a)$
+\end{itemize}
+第一条证明：令$n=2^{p}q,k=2^{t}r$，其中$q,r$是奇数\par
+\begin{itemize}
+	\item 情况1： 如果$k=1$，那么有$Y=1$,是$n$的技术因子，而$X=2n$是偶数
+	\item 情况2： 如果$t=p+1,r=1$，那么有$X=q,Y=2^{p+1}$,只有$X$是奇数因子
+	\item 情况3： 如果$t=p+1,r > 1$且$r$可以整除$q$，那么有$X=\frac{q}{r},Y=2^{p+1}r$,只有$X$是奇数因子
+	\item 情况4： 如果$t=0,r > 1$且$r$可以整除$q$，那么有$X=\frac{2^{p+1}q}{r},Y=r$,只有$Y$是奇数因子
+\end{itemize}
+第二条证明：\par
+\begin{itemize}
+	\item $n$的每一个奇数因子，一定对应某个$X$或者$Y$,而不会是$X_{1},Y_{1}$中的$X_{1}$以及$X_{1},Y_{2}$中的$Y_{2}$
+	\item 假设存在一个奇数因子$h=X_{1}=Y_{2}$.
+	\item 那么$X_{1}-Y_{1}=h-\frac{2n}{h},X_{2}-Y_{2}=\frac{2n}{h}-h$
+	\item 它们是相反数，所以只能有一个为正数
+	\item 不会有一个奇数因子不对应一组解，因为它不会是第一条证明的四种情况之外的情况
+\end{itemize}
+下面就是如何计算$n$的奇数因子的个数，由于奇数因子是由若干个奇质数的乘积，所以令$n=2^{e}p_{1}^{t_{1}}p_{2}^{t_{2}}...p_{k}^{t_{k}}$，其中$p_{1},p_{2},...,p_{k}$是奇素数，那么$n$的奇因子的个数为$(t_{1}+1)(t_{2}+1)...(t_{k}+1)$ \par
+~\\
+~\\
+31 $\sum_{k\geq 2}(\zeta (k)-1)$ \par
+$=\sum_{t\geq 2}\sum_{k\geq 2}\frac{1}{t^{k}}$ \par
+$=\sum_{t\geq 2}\frac{1}{(t-1)t}$ \par
+$=\sum_{t\geq 2}(\frac{1}{t-1}-\frac{1}{t})=1$ \par
+$\sum_{k\geq 1}(\zeta (2k)-1)$ \par
+$=\sum_{t\geq 2}\sum_{k\geq 1}\frac{1}{t^{2k}}$ \par
+$=\sum_{t\geq 2}\frac{1}{t^{2}-1}$ \par
+$=\sum_{t\geq 2}\frac{1}{2}(\frac{1}{t-1}-\frac{1}{t+1})$ \par
+$=\frac{1}{2}(1+\frac{1}{2})=\frac{3}{4}$ \par
+~\\
+32 分两种情况: \par
+(1)$2n\leq x < 2n+1$
+\begin{itemize}
+	\item 左边=$\sum_{k=0}^{n}k+\sum_{k=n+1}^{2n}(x-k)=\sum_{k=1}^{n}k+\sum_{k=1}^{n}(x-(k+n))=\sum_{k=1}^{n}(x-n)=n(x-n)$
+	\item 右边等于$\sum_{k=0}^{n-1}(x-(2k+1))=nx-\sum_{k=0}^{n-1}(2k+1)=nx-n^{2}=n(x-n)$
+\end{itemize}
+
+
+(2)$2n-1\leq x < 2n$
+\begin{itemize}
+	\item 左边=$\sum_{k=0}^{n-1}k+\sum_{k=n}^{2n-1}(x-k)=\sum_{k=0}^{n-1}k+\sum_{k=0}^{n-1}(x-(k+n))=\sum_{k=0}^{n-1}(x-n)=n(x-n)$
+	\item 右边=$\sum_{k=0}^{n-1}(x-(2k+1))=n(x-n)$
+\end{itemize}
+~\\
 \end{document}
