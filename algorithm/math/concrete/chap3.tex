@@ -1,0 +1,158 @@
+\documentclass[onecolumn]{article}
+\usepackage{xeCJK}
+\usepackage{amsmath}
+\usepackage{listings}
+\usepackage{xcolor}
+\setlength{\parindent}{0pt}
+\renewcommand{\baselinestretch}{1.0}
+\lstset{
+	frame=tb, % draw a frame at the top and bottom of the code block
+	showstringspaces=false, % don't mark spaces in strings
+	numbers=left, % display line numbers on the left
+	commentstyle=\color{green}, % comment color
+	keywordstyle=\color{blue}, % keyword color
+	stringstyle=\color{red} % string color
+}
+\usepackage[a4paper,left=20mm,right=20mm,top=15mm,bottom=15mm]{geometry}  
+
+
+\begin{document}
+1 $m=\left \lfloor lg(n) \right \rfloor$,$l=n-2^{m}=n-2^{\left \lfloor lg(n) \right \rfloor}$ \par
+~\\
+2 (1)如果规定$x=n.5$时向上取整，那么距离实数$x$最近的整数为$\left \lfloor x+0.5 \right \rfloor$ \par
+(2)如果规定$x=n.5$时向下取整，那么距离实数$x$最近的整数为$\left \lceil x-0.5 \right \rceil$ \par
+~\\
+3 $\left \lfloor \frac{\left \lfloor m\alpha \right \rfloor n}{\alpha} \right \rfloor$ \par
+$=\left \lfloor \frac{(m\alpha - \left \{ m\alpha \right \})n}{\alpha} \right \rfloor$\par
+$=\left \lfloor mn-\frac{\left \{ m\alpha \right \}n}{\alpha} \right \rfloor=mn-1$\par
+其中$0<\left \{ m\alpha \right \}<1$\par
+~\\
+4 不清楚 \par
+~\\
+5 将$x=\left \lfloor x \right \rfloor+\left \{ x \right \}$代入：\par
+右侧=$\left \lfloor n\left \lfloor x \right \rfloor+n\left \{ x \right \} \right \rfloor=n\left \lfloor x \right \rfloor+\left \lfloor n\left \{ x \right \} \right \rfloor$ \par
+左侧=$n\left \lfloor \left \lfloor x \right \rfloor +\left \{ x \right \}\right \rfloor=n\left \lfloor x \right \rfloor$ \par
+所以$\left \lfloor n\left \{ x \right \} \right \rfloor=0$，所以$\left \{ x \right \}<\frac{1}{n}$ \par
+~\\
+6 $\left \lfloor f(x) \right \rfloor=\left \lfloor f(\left \lceil x \right \rceil) \right \rfloor$ \par
+$\left \lceil f(x) \right \rceil=\left \lceil f(\left \lfloor x \right \rfloor) \right \rceil$ \par
+~\\
+
+7 $n$\%$m+\left \lfloor \frac{n}{m} \right \rfloor$ \par
+~\\
+8 (1)假设都小于$\left \lceil \frac{n}{m} \right \rceil$，那么有$n\leq (\left \lceil \frac{n}{m} \right \rceil-1)m$，即$\frac{n}{m}+1\leq \left \lceil \frac{n}{m} \right \rceil$，恒不成立。\par
+（2）假设都大于$\left \lfloor \frac{n}{m} \right \rfloor$,那么有$n\geq (\left \lfloor \frac{n}{m} \right \rfloor+1)m$,即$\frac{n}{m}-1\geq \left \lfloor \frac{n}{m} \right \rfloor$,恒不成立。\par
+~\\
+9 如果$n$\%$m$=0，则显然成立。 \par
+否则，令$n=m(q-1)+t,0<t<m$,那么有$\frac{m}{n}-\frac{1}{q}=\frac{m-t}{nq}$,可以看到分子严格减少1. \par
+~\\
+10 令$0\leq p<1$。分两种情况考虑：\par
+（1）$x=2k+1+p$,此时可以得到：如果$p<0.5$，那么答案为$2k+1$,否则为$2k+2$ \par
+（2）$x=2k+p$,此时可以得到：如果$p\leq0.5$，那么答案为$2k$,否则为$2k+1$ \par
+综上所述:如果$x\in(2k+0.5,2k+1.5)$，答案为$2k+1$,否则$x\in[2k-0.5,2k+0.5]$，答案为$2k$ \par
+~\\
+11 当$\alpha=\beta=$整数时不成立。\par
+~\\
+12 令$n=km+t,0\leq t<m$,当$t=0$时显然成立。否则$\left \lceil \frac{n}{m} \right \rceil=k+1$,$\left \lfloor \frac{n+m-1}{m} \right \rfloor=k+\left \lfloor \frac{t+m-1}{m} \right \rfloor=k+1$ \par
+~\\
+13(1)由后面向前证明比较简单，即若$\frac{1}{\alpha}+\frac{1}{\beta}=1$且都为无理数，那么构成一个划分。\par
+（2）由前向后证明：先讨论$\frac{n+1}{\alpha}+\frac{n+1}{\beta}-\left \{ \frac{n+1}{\alpha} \right \}-\left \{ \frac{n+1}{\beta} \right \}=n$是否在$\frac{1}{\alpha}+\frac{1}{\beta}\neq1$的时候成立。\par
+假设$\frac{1}{\alpha}+\frac{1}{\beta}=0.999$，那么当$n$足够大比如 $n=100000$,这个等式必然不成立； \par
+假设$\frac{1}{\alpha}+\frac{1}{\beta}==1.001$，那么当$n$足够大比如 $n=100000$,这个等式必然也不成立。\par
+所以假设失败。\par
+假设$\alpha,\beta$为有理数是必然是不行的，因为那样的话必然会存在两个整数$n_{1},n_{2}$使得$n_{1}\alpha=n_{2}\beta$.如果一个是有理数一个是无理数，那么不能满足$\frac{1}{\alpha}+\frac{1}{\beta}==1$\par
+~\\
+14 首先，如果$ny=0$时显然成立。\par
+否则，$((x)mod(ny))mod(y)=(x-ny\left \lfloor \frac{x}{ny} \right \rfloor)mod(y)=(x)mod(y)$ \par
+所以恒成立。\par
+~\\
+15 $\left \lceil mx \right \rceil=\sum_{i=0}^{m-1}\left \lceil x-\frac{i}{m} \right \rceil$ \par
+~\\
+16 根据$n$\%3等于 0,1,2列三个方程然后计算出$a,b,c$的值，$a=1,b=\frac{w-1}{3},c=-\frac{w+2}{3}$ \par
+~\\
+17 $\sum_{0\leq k<m}[x+\frac{k}{m}]$ \par
+$=\sum_{j,k}[0\leq k<m][1\leq j \leq x+\frac{k}{m}]$ \par
+$=\sum_{j,k}[0\leq k<m][1\leq j \leq \left \lceil x \right \rceil]-\sum_{k}[0\leq k <m(\left \lceil x \right \rceil-x)]$ \par
+$=m\left \lceil x \right \rceil-\left \lceil m(\left \lceil x \right \rceil-x) \right \rceil$ \par
+$=\left \lfloor mx \right \rfloor$ \par
+~\\
+18 不清楚 \par
+~\\
+19 首先若$b$不是整数，那么等式在$x=b$时一定不成立。若$b$为整数，则$log_{b}(x)$取整数时必定有$x$为整数。那么根据公式$3.10$,恒成立。  \par
+~\\
+20 $x\sum_{k}k[\left \lceil \frac{\alpha}{x} \right \rceil\leq k \leq \left \lfloor \frac{\beta}{x} \right \rfloor]=\frac{x(p+q)(q-p+1)}{2}$ \par
+其中$p=\left \lceil \frac{\alpha}{x} \right \rceil,q=\left \lfloor \frac{\beta}{x} \right \rfloor$ \par
+~\\
+21 如果$10^{n}\leq 2^M <10^{n+1}$,那么有$n+1$个$m$满足要求。假设$n=4,M=15$,\par
+那么满足要求的有$2^{0}=1 \in[10^{0},10^{1}-1],2^{4}=16\in[10^{1},10^{2}-1],2^{7}=128\in[10^{2},10^{3}-1],2^{10}=1024\in[10^{3},10^{4}-1],2^{14}=16384\in[10^{4},10^{5}-1]$.所以答案为$1+\left \lfloor Mlog_{10}^{2} \right \rfloor$ \par
+~\\
+22  假设$n=2^{t-1}q,t \ge 1$，其中$q$为奇数。
+\begin{itemize}
+	\item 那么当$k=t$时，$\left \lfloor \frac{n}{2^{t}}+\frac{1}{2} \right \rfloor=\frac{q+1}{2},\left \lfloor \frac{n-1}{2^{t}}+\frac{1}{2} \right \rfloor=\frac{q-1}{2}$
+	\item 如果$k\neq t$，$\left \lfloor \frac{n}{2^{k}}+\frac{1}{2} \right \rfloor=\left \lfloor \frac{n-1}{2^{k}}+\frac{1}{2} \right \rfloor$(下面会证明这个)
+\end{itemize}
+所以$S_{n}=S_{n-1}+1$(这里$S_{n-1},$是$k \ne t$的部分，1是$k=t$的部分),所以$S_{n}=n$. \par
+所以$T_{n}=T_{n-1}+2^{t}((\frac{q+1}{2})^{2}-(\frac{q-1}{2})^{2})=T_{n-1}+2n$,所以$T_{n}=n(n+1)$. \par
+下面正面上面$k\ne t$的部分。\par
+（1） $1 \le k \le t-1$:那么，$\left \lfloor \frac{n}{2^{k}}+\frac{1}{2} \right \rfloor=2^{t-1-k}q$,$\left \lfloor \frac{n-1}{2^{k}}+\frac{1}{2} \right \rfloor=2^{t-1-k}q+\left \lfloor -\frac{1}{2^{k}}+\frac{1}{2} \right \rfloor=2^{t-1-k}q$\par
+（2） $k \ge t+1$:$\left \lfloor \frac{n}{2^{k}}+\frac{1}{2} \right \rfloor=\left \lfloor \frac{q}{2^{k-t+1}}+\frac{1}{2} \right \rfloor$,$\left \lfloor \frac{n-1}{2^{k}}+\frac{1}{2} \right \rfloor=\left \lfloor \frac{q}{2^{k-t+1}}-\frac{1}{2^{k}}+\frac{1}{2} \right \rfloor$.不妨令$1\le q<2^{k-t+1}$.因为大于的部分可以作为整数单独拿出来。此时分两种情况。第一种$0 < \frac{q}{2^{k-t+1}} < \frac{1}{2}$,那么两边都等于0.第二种，$\frac{1}{2} \le \frac{q}{2^{k-t+1}} < 1$,那么只需要证明$ \frac{q}{2^{k-t+1}}-\frac{1}{2} \ge \frac{1}{2^{k}}$。因为$q$是奇数，所以可以$q \ge 2^{k-t}+1$.所以$\frac{q}{2^{k-t+1}}-\frac{1}{2} \ge \frac{1}{2^{k-t+1}} \ge \frac{1}{2^{k}} $。此时两边都等于1\par
+~\\
+23 假设第$n$个数字是$t$，那么$[1,t-1]$一共有$\frac{t(t-1)}{2}$个数字，所以$\frac{t(t-1)}{2}<n\leq \frac{t(t+1)}{2}\leftrightarrow t^{2}-t<2n\leq t^{2}+t$,进而得到$ t^{2}-t+\frac{1}{4}<2n< t^{2}+t+\frac{1}{4}\leftrightarrow t-\frac{1}{2}<\sqrt{2n}<t+\frac{1}{2}\leftrightarrow \sqrt{2n}-\frac{1}{2}<t<\sqrt{2n}+\frac{1}{2}\Rightarrow t=\left \lfloor \sqrt{2n}+\frac{1}{2} \right \rfloor$ \par
+~\\
+24   $N(\alpha,n)=\left \lceil \frac{n+1}{\alpha} \right \rceil-1$ \par
+$N(\frac{\alpha}{\alpha + 1},n)=\left \lceil \frac{(n+1)(\alpha + 1)}{\alpha} \right \rceil-1=(n+1)+\left \lceil \frac{n+1}{\alpha} \right \rceil-1=N(\alpha,n)+n+1$ \par
+所以数字$m$，其在$Spec(\frac{\alpha}{\alpha +1})$出现的次数比在$Spec(\alpha)$出现的次数多1. \par
+~\\
+25 数学归纳法：对所有$n, K_{0} \ge n+1$,对于$n=3p+1,K_{n}\ge n+2, $ \par
+首先对$n=0,1,2,3,4,5$都满足 \par
+假设$[0,n-1]$都满足，现在证明$K_{n}$.按照$n$模6的余数分六种情况\par
+$\begin{matrix} 
+n & 2K_{\left \lfloor \frac{n}{2} \right \rfloor} & 3K_{\left \lfloor \frac{n}{3} \right \rfloor} & min & min+1 & target & compare \\ 
+6p & 6p+2 & 6p+3 & 6p+2 & 6p+3 & 6p+1 & ok\\ 
+6p+1 & 6p+2 & 6p+3 & 6p+2 & 6p+3 & 6p+3 & ok &\\
+6p+2 & 6p+6 & 6p+3 & 6p+3 & 6p+4 & 6p+3 & ok &\\
+6p+3 & 6p+6 & 6p+6 & 6p+6 & 6p+7 & 6p+4 & ok &\\
+6p+4 & 6p+6 & 6p+6 & 6p+6 & 6p+7 & 6p+6 & ok &\\
+6p+5 & 6p+6 & 6p+6 & 6p+6 & 6p+7 & 6p+6 & ok &\\
+\end{matrix}$ \par
+~\\
+~\\
+26 前半部分很明显成立：$(\frac{q}{q-1})^{n}\leq D_{n}^{q}$ \par
+对于后半部分，由于$(q-1)((\frac{q}{q-1})^{n+1}-1)=\frac{q^{n+1}}{(q-1)^{n}}-(q-1)<\frac{q^{n+1}}{(q-1)^{n}}=q(\frac{q}{q-1})^{n}$ \par
+所以现在证明$D_{n}^{q}\leq (q-1)((\frac{q}{q-1})^{n+1}-1)$ \par
+当$n=0,1$时成立，假设对于$[0,n-1]$均成立 \par
+那么$D_{n}^{q}=\left \lceil \frac{q}{q-1}D_{n-1}^{q} \right \rceil\leq \left \lceil \frac{q}{q-1}(q-1)((\frac{q}{q-1})^{n}-1) \right \rceil$ \par
+$=\left \lceil \frac{q^{n+1}}{(q-1)^{n}} \right \rceil-q<\frac{q^{n+1}}{(q-1)^{n}}+1-q$ \par
+$=(q-1)((\frac{q}{q-1})^{n+1}-1)$ \par
+~\\
+27 首先若第$n$项为偶数，即$D_{n}^{3}=2^{t}q$，$q$为奇数，那么$D_{n+t}^{3}=3^{t}q$为奇数；\par
+若第$n$项为奇数，设为$D_{n}^{3}=2^mq-1$, $q$为奇数。那么$D_{n+1}^{3}=D_{n}^{3}+\left \lceil \frac{D_{n}^{3}}{2} \right \rceil=2^{m}q-1+2^{m-1}q=2^{m-1}*3q-1$,所以$D_{n+m}^{3}=3^{m}q-1$为偶数。\par
+~\\
+28 $a_{n}=m^{2}\rightarrow a_{n+2k+1}=(m+k)^{2}+m-k,a_{n+2k+2}=(m+k)^{2}+2m,0\leq k \leq m$ \par
+$\rightarrow a_{n+2m+1}=(2m)^{2}$ \par
+~\\
+29 不清楚 \par
+~\\
+30 可以用数学归纳法证明:$X_{n}=\alpha^{2^{n}}+\frac{1}{\alpha^{2^{n}}}$.而$\frac{1}{\alpha^{2^{n}}}<1$，同时$X_{n}$是整数，所以$X_{n}=\left \lceil \alpha^{2^{n}} \right \rceil$ \par
+~\\
+31 $\left \lfloor x \right \rfloor+\left \lfloor y \right \rfloor+\left \lfloor x+y \right \rfloor=\left \lfloor x+\left \lfloor y \right \rfloor \right \rfloor+\left \lfloor x+y \right \rfloor$ \par
+(1)$\left \lfloor y \right \rfloor\leq \frac{1}{2}\left \lfloor 2y \right \rfloor$，可以分别假设$y$是整数，$y$是小数且小数部分小于$0.5$以及小数部分大于等于$0.5$三种情况讨论，可以得到这个式子总是成立；\par
+（2）$y\leq  \frac{1}{2}\left \lfloor 2y \right \rfloor+\frac{1}{2}$ 这个的证明也可以像上面一样分三种情况讨论 \par
+所以$\left \lfloor x+\left \lfloor y \right \rfloor \right \rfloor+\left \lfloor x+y \right \rfloor\leq \left \lfloor x+\frac{1}{2}\left \lfloor 2y \right \rfloor \right \rfloor+\left \lfloor x+\frac{1}{2}\left \lfloor 2y \right \rfloor+\frac{1}{2} \right \rfloor$ \par
+此时，令$p=\left \lfloor 2y \right \rfloor$。可以看出，不管$p$是奇数还是偶数，都有$\left \lfloor x+\frac{1}{2}\left \lfloor 2y \right \rfloor \right \rfloor+\left \lfloor x+\frac{1}{2}\left \lfloor 2y \right \rfloor+\frac{1}{2} \right \rfloor=\left \lfloor x \right \rfloor+\left \lfloor x+\frac{1}{2} \right \rfloor+\left \lfloor 2y \right \rfloor$ \par
+最后可以发现，同样将$x$像上面一样分三种情况讨论有$\left \lfloor x \right \rfloor+\left \lfloor x+\frac{1}{2} \right \rfloor=\left \lfloor 2x \right \rfloor$ \par
+所以结论是给出的关系恒成立 \par
+~\\
+32 设$f(x)=\sum _{k}2^{k}||\frac{x}{2^{k}}||^{2}$,那么有$f(x)=f(-x)$，所以只需要考虑$x\geq 0$ 的部分。\par
+设$l(x)=\sum _{k\leq 0}2^{k}||\frac{x}{2^{k}}||^{2},r(x)=\sum _{k>0}2^{k}||\frac{x}{2^{k}}||^{2}$ \par
+对于$l(x)$来说，由于$\frac{1}{2^{k}}$是整数,所以$l(x+1)=l(x)$,由于$||x||\leq \frac{1}{2}$,所以$l(x)\leq \frac{1}{2}(\sum _{k\leq 0}2^{k})=1$ \par
+对于$r(x)$来说，假设$0 \leq x < 1$,$r(x)=\sum _{k>0}\frac{x^{2}}{2^{k}}=x^{2}$,$r(x+1)=\frac{(x-1)^{2}}{2}+\sum _{k>1}\frac{(x+1)^{2}}{2^{k}}=x^{2}+1=f(x)+1$ \par
+所以对于$0 \leq x < 1$,来说，有$f(x+1)=f(x)+1$.接下去可以证明，对于所有的$n$都有$f(x+n)=f(x)+n$ \par
+下面考虑$x$是任意的非负数的情况。 \par
+首先有一个性质，$f(2x)=\sum _{k}2^{k}||\frac{2x}{2^{k}}||^{2}=2\sum _{k}2^{k-1}||\frac{x}{2^{k-1}}||^{2}=2f(x)$ \par
+所以$f(x)=2^{-m}f(2^{m}x)$.然后利用上面的性质$f(x+n)=f(x)+n$，有$f(x)=2^{-m}f(2^{m}x)=2^{-m}(\left \lfloor 2^{m}x \right \rfloor+f(\left \{ 2^{m}x \right \}))$ \par
+而$f(\left \{ 2^{m}x \right \})=l(\left \{ 2^{m}x \right \})+r(\left \{ 2^{m}x \right \})\leq 1+1=2$ \par
+所以$|f(x)-x|\leq |2^{-m}\left \lfloor 2^{m}x \right \rfloor-x|+2^{-m}*2=2^{-m}|\left \lfloor 2^{m}x \right \rfloor-2^{m}x|+2^{-m}*2\leq 2^{-m}*3$ \par
+这个式子对于所有的整数$m$成立，所以$f(x)=x$ \par
+~\\
+\end{document}

@@ -4,8 +4,10 @@
 #include <vector>
 
 #include "lock_free_stack.h"
+#include "lock_free_stack_v2.h"
 
-lock_free_stack<int> st;
+// lock_free_stack<int> st;
+LockFreeStackV2<int> st;
 
 std::atomic<bool> go(false);
 std::atomic<bool> stop(false);
@@ -46,6 +48,7 @@ void pop(int id) {
 }
 
 int main() {
+
   std::vector<int> s = {1, 2, 3, 4, 5, 6, 7, 8, 9};
   logs.resize(36);
   std::thread t1(push, s, 1);
