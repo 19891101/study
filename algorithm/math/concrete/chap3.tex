@@ -3,6 +3,7 @@
 \usepackage{amsmath}
 \usepackage{listings}
 \usepackage{xcolor}
+\usepackage{hyperref}
 \setlength{\parindent}{0pt}
 \renewcommand{\baselinestretch}{1.0}
 \lstset{
@@ -154,5 +155,65 @@ $\rightarrow a_{n+2m+1}=(2m)^{2}$ \par
 而$f(\left \{ 2^{m}x \right \})=l(\left \{ 2^{m}x \right \})+r(\left \{ 2^{m}x \right \})\leq 1+1=2$ \par
 所以$|f(x)-x|\leq |2^{-m}\left \lfloor 2^{m}x \right \rfloor-x|+2^{-m}*2=2^{-m}|\left \lfloor 2^{m}x \right \rfloor-2^{m}x|+2^{-m}*2\leq 2^{-m}*3$ \par
 这个式子对于所有的整数$m$成立，所以$f(x)=x$ \par
+~\\
+33 (1)半径$r=n-\frac{1}{2}$不是整数，所以圆不会经过格点。圆内部有$2n-1$条横线以及$2n-1$条竖线，与每条线有两个交点，相邻两个交点之间都是一个正方形，所以有几个交点就有几个正方形，所以有$8n-4=8r$个；\par
+（2）$f(n,k)=4\left \lfloor \sqrt{r^{2}-k^{2}} \right \rfloor$ \par
+~\\
+34 (1)设$m=\left \lceil lg(n) \right \rceil$,$f(2^m)=\sum_{k=1}^{2^{m}}\left \lceil lg(k) \right \rceil=\sum_{k=1}^{m}k2^{k-1}=m2^{m}-2^{m}+1$ \par
+所以$f(n)=f(2^m)-(2^{m}-n)m=\left (m2^{m}-2^{m}+1  \right )-\left ( m2^{m}-nm \right )=mn-2^{m}+1$ \par
+(2) 如果 $n$是偶数，那么$\left \lceil lg(\frac{n}{2}) \right \rceil=\left \lceil lg(n)-1 \right \rceil=m-1\rightarrow n-1+2f(\frac{n}{2})=n-1+2(\frac{n}{2}(m-1)-2^{m-1}+1)=nm-2^{m}+1=f(n)$ \par
+如果$n$是奇数，设$n=2p+1$,$\left \lceil \frac{n}{2} \right \rceil=p+1,\left \lfloor \frac{n}{2} \right \rfloor=p$ \par
+$2^{m-1}<2p+1\leq 2^{m}$ \par
+$\rightarrow 2^{m-2}<p+1\leq 2^{m-1}$ \par
+$\rightarrow \left \lceil p+1 \right \rceil=m-1$ \par
+$\rightarrow f(p+1)=(p+1)(m-1)-2^{m-1}+1$ \par
+$2^{m-1}<2p+1\leq 2^{m}\rightarrow 2^{m-2}\leq p< 2^{m-1}$,所以$\left \lceil lg(p) \right \rceil=m-2$或者$\left \lceil lg(p) \right \rceil=m-1$ \par
+如果是前者，那么有$p=2^{m-2}$，所以$f(p=2^{m-2})=p(m-2)-2^{m-2}+1=p(m-1)-p-2^{m-2}+1=p(m-1)-2^{m-1}+1=f(p)(2^{m-2}<p<2^{m-1})$ \par
+可以看到两种情况结果一样 \par
+两者相加可以得到$n-1+f(p+1)+f(p)=n-1+\left ((p+1)(m-1)-2^{m-1}+1  \right )+\left (p(m-1)-2^{m-1}+1  \right )=n-1+(2p+1)(m-1)-2^{m}+2=nm-2^{m}+1=f(n)$ \par
+~\\
+35 首先，将$e$进行泰勒展开，$e=\frac{1}{0!}+\frac{1}{1!}+\frac{1}{2!}+...$ \par
+带入式子中得到$(n+1)^{2}n!e=\left ( \frac{(n+1)^{2}n!}{0!}+\frac{(n+1)^{2}n!}{1!}+ ...+\frac{(n+1)^{2}n!}{(n-1)!}\right )+(n+1)^{2}+(n+1)+\left ( \frac{(n+1)^{2}n!}{(n+2)!}+\frac{(n+1)^{2}n!}{(n+3)!}+\frac{(n+1)^{2}n!}{(n+4)!}+... \right )$ \par
+其中$ \frac{(n+1)^{2}n!}{(n+2)!}+\frac{(n+1)^{2}n!}{(n+3)!}+\frac{(n+1)^{2}n!}{(n+4)!}+...$ \par
+$=\frac{n+1}{n+2}\left ( 1+\frac{1}{n+3}+\frac{1}{(n+3)(n+4)} +\frac{1}{(n+3)(n+4)(n+5)}+...\right )$ \par
+$<\frac{n+1}{n+2}\left ( 1+\frac{1}{n+3}+\frac{1}{(n+3)(n+3)} +\frac{1}{(n+3)(n+3)(n+3)}+...\right )$ \par
+$=\frac{(n+1)(n+3)}{(n+2)^{2}}<1$ \par
+所以答案是$\left (\left ( \frac{(n+1)^{2}n!}{0!}+\frac{(n+1)^{2}n!}{1!}+ ...+\frac{(n+1)^{2}n!}{(n-1)!}\right )+(n+1)^{2}+(n+1)  \right )mod\left ( n \right )=2mod\left ( n \right )$\par
+~\\
+36 将整个区间按照下面进行划分:$[2^{2^{0}},2^{2^{1}}),[2^{2^{1}},2^{2^{2}}),...,[2^{2^{n-1}},2^{2^{n}}),$ \par
+考虑这一段$[2^{2^{t}},2^{2^{t+1}})$\par
+当$k\in [2^{2^{t}},2^{2^{t+1}})$时，$\left \lfloor lg(lg(k)) \right \rfloor=t$ \par
+再将$[2^{2^{t}},2^{2^{t+1}})$分成以下几段:$[2^{0+2^{t}},2^{1+2^{t}}),[2^{1+2^{t}},2^{2+2^{t}}),...,[2^{(2^{t}-1)+2^{t}},2^{2^{t}+2^{t}})$\par
+$x\in [2^{p+2^{t}},2^{p+1+2^{t}})\rightarrow \left \lfloor lg(x) \right \rfloor=p+2^{t}$。而这一段数字个数恰好为$2^{p+2^{t}}$ \par
+所以$[2^{2^{t}},2^{2^{t+1}})$的总和为$\frac{1}{4^{t}}(1+1+1+...+1)=\frac{2^{t}}{4^{t}}=\frac{1}{2^{t}}$ \par
+所以整个式子的和为$\frac{1}{2^{0}}+\frac{1}{2^{1}}+\frac{1}{2^{2}}+...+\frac{1}{2^{n-1}}=2-\frac{1}{2^{n-1}}$\par
+~\\
+37 (1)$m<\frac{n}{2}$:这时候两边都是0，因为$(m)mod(n)<(-m)mod(n)$ \par
+(2)$\frac{2}{n}\leq m < n$:这时候仅当$n-m\leq k < m$时左边为1,所以左侧为$2m-n$.此时$(n)mod(m)>(-m)mod(n)=n-m$,所以右侧 $=\left \lfloor \frac{m^{2}}{n} \right \rfloor-\left \lfloor \frac{(n-m)^{2}}{n} \right \rfloor=2m-n$\par
+(3)当$m\geq n$时可以将$\left \lfloor \frac{m}{n} \right \rfloor$单独分离出来，这部分两边相等。剩下的就是上面两种情况之一\par
+~\\
+38 对所有的$m$有$\sum_{k=1}^{n}\left \{ mx_{k} \right \}<1$,所以至多有一个$x_{t}$不是整数。\par
+如果有两个数字不是整数，设为 $x,y$，那么根据\href{https://baike.baidu.com/item/%E4%B8%80%E8%87%B4%E5%88%86%E5%B8%83/12572054?fr=aladdin}{一致分布}原理，点$(\left \{ mx \right \},\left \{ my \right \})$会均匀分布在1*1的正方形中，所以一定存在$k$满足，$\left \{ kx \right \}+\left \{ ky \right \}\geq 1$. \par
+~\\
+39 $T=\left \lfloor log_{b}^{x} \right \rfloor\rightarrow b^{T}\leq x<b^{T+1}$ \par
+$\sum_{k=0}^{T}\sum_{0<j<b}\left \lceil \frac{x+jb^{k}}{b^{k+1}} \right \rceil$ \par
+$=\sum_{k=0}^{T}\sum_{0<b-j<b}\left \lceil \frac{x+(b-j)b^{k}}{b^{k+1}} \right \rceil$ \par
+$=\sum_{k=0}^{T}\sum_{0<j<b}\left (1+\left \lceil \frac{x}{b^{k+1}}-\frac{j}{b} \right \rceil \right )$ \par
+$=(b-1)(T+1)+\sum_{k=0}^{T}\sum_{0<j<b} \left \lceil \frac{x}{b^{k+1}}-\frac{j}{b} \right \rceil $ \par
+$=(b-1)(T+1)+\sum_{k=0}^{T}\left ( \left (\sum_{0\leq j<b} \left \lceil \frac{x}{b^{k+1}}-\frac{j}{b} \right \rceil \right ) -\left \lceil \frac{x}{b^{k+1}} \right \rceil \right ) $\par
+$=(b-1)(T+1)+\sum_{k=0}^{T}\left ( \left \lceil \frac{x}{b^{k}} \right \rceil -\left \lceil \frac{x}{b^{k+1}} \right \rceil \right )$\par
+$ =(b-1)(T+1)+\left \lceil \frac{x}{b^{0}} \right \rceil-\left \lceil \frac{x}{b^{T+1}} \right \rceil$\par
+$=(b-1)(T+1)+\left \lceil x \right \rceil-1$ \par
+其中$\sum_{0\leq j<b} \left \lceil \frac{x}{b^{k+1}}-\frac{j}{b} \right \rceil =\left \lceil \frac{x}{b^{k}} \right \rceil$是习题15的结论\par
+~\\
+40 (1) 可以发现以下规律: \par
+$(2k-1)(2k-1)\leq n \leq (2k-1)2k,m=2k-1,\left \lfloor 2\sqrt{n} \right \rfloor =4k-2$,上方水平的线 \par
+$(2k-1)2k< n < 2k*2k, m=2k-1, \left \lfloor 2\sqrt{n} \right \rfloor =4k-1$，左侧垂直的线 \par
+$2k*2k\leq n \leq 2k(2k+1), m=2k, \left \lfloor 2\sqrt{n} \right \rfloor =4k$， 下方水平的线 \par
+$ (2k+1)2k< n < (2k+1)(2k+1), m=2k+1, \left \lfloor 2\sqrt{n} \right \rfloor =4k+1$，右侧垂直的线 \par
+第一种情况$m(m+1)$表示水平线最左侧的线 \par
+第三种情况$m(m+1)$表示水平线最右侧的线 \par
+由以上内容很容易证明$x(n)$的公式。$y(n)=(-1)^{m}(n-m(m+1)[\left \lfloor 2\sqrt{n} \right \rfloor$是奇数$]-\left \lceil \frac{m}{2} \right \rceil)$ \par
+（2）第一种第二种情况，符号为负，满足$x(n) < y(n)$,第三种第四种情况，符号为正，满足$x(n) \geq y(n)$.所以符号为$(-1)^{[x(n)<y(n)]}$ \par
 ~\\
 \end{document}
