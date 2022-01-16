@@ -1,0 +1,77 @@
+\documentclass[onecolumn]{article}
+\usepackage{xeCJK}
+\usepackage{amsmath}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\setlength{\parindent}{0pt}
+\renewcommand{\baselinestretch}{1.0}
+\lstset{
+	frame=tb, % draw a frame at the top and bottom of the code block
+	showstringspaces=false, % don't mark spaces in strings
+	numbers=left, % display line numbers on the left
+	commentstyle=\color{green}, % comment color
+	keywordstyle=\color{blue}, % keyword color
+	stringstyle=\color{red} % string color
+}
+\usepackage[a4paper,left=20mm,right=20mm,top=15mm,bottom=15mm]{geometry}  
+
+
+\begin{document}
+1 令$n=2^{a}3^{b}5^{c}$，它的因子个数为$k=(a+1)(b+1)(c+1)$。所以$k=1,2,3,4,5,6$时对应的$n=1,2,4,6,16,12$ \par
+~\\
+2 $Gcd(n,m)*Lcm(n,m)=n*m$.因为对于某个素数$p$，$m,n$中$p$的个数的最小值最大值分别在最大公约数和最小公倍数中\par
+$Gcd((n)mod(m),m)*Lcm((n)mod(m),m)=(n)mod(m)*m$\par
+$Gcd(n,m)=Gcd((n)mod(m),m)$ \par
+$\Rightarrow Lcm(n,m)=Lcm((n)mod(m),m)*\frac{n}{(n)mod(m)}$\par
+~\\
+3 $x$是整数时满足，$x$为实数时$\pi (x)-\pi(x-1)=[\left \lfloor x \right \rfloor is$ $prime]$\par
+~\\
+4 depth1: $\frac{1}{1},\frac{1}{-1},\frac{-1}{-1},\frac{-1}{1}$\par
+depth2: $\frac{1}{2},\frac{2}{1},\frac{2}{-1},\frac{-1}{-2},\frac{-2}{-1},\frac{-2}{1},\frac{-1}{2}$ \par
+如果把分子分母看作一个二维向量的话，每一层都是顺时针排列的。 \par
+~\\
+5 \par
+$L^{k}=\begin{bmatrix}
+1 & k\\
+0 & 1
+\end{bmatrix}$ \par
+$R^{k}=\begin{bmatrix}
+1 & 0\\ 
+k & 1
+\end{bmatrix}$ \par
+~\\
+6 $(x)mod(0)=x\rightarrow a=b$ \par
+~\\
+7 $m$需要满足$(m)mod(10)=0,(m)mod(9)=k,(m)mod(8)=1$  \par
+$(m)mod(10)=0$说明$m$是偶数，$(m)mod(8)=1$说明$m$是奇数。这是矛盾的。\par
+~\\
+8 $9x+y=3k,10x=5p$.这说明$y$可以取0,3，$x$可以取0,1.\par
+~\\
+9 $3^{2t+1}mod(4)=3$。所以$3^{2t+1}=4k+3$.所以$\frac{3^{2t+1}-1}{2}=2k+1$是奇数。\par
+另外$\frac{3^{77}-1}{2}$可以被$\frac{3^{7}-1}{2}$整除。因为$3^{77}-1=(3^{7}-1)(3^{70}+3^{63}+..+3^{7}+3^{0})$\par
+~\\
+10 $999=3^{3}37^{1}\rightarrow \varphi (999)=999(1-\frac{1}{3})(1-\frac{1}{37})=648$\par
+~\\
+11 $f(n)=g(n)-g(n-1)\rightarrow \sigma (0)=1,\sigma (1)=-1,\sigma (n)=0,n>1$\par
+~\\
+12 $\sum_{d|m}\sum _{k|d}\mu (k)g(\frac{d}{k})=\sum_{d|m}\sum _{k|d}\mu  (\frac{d}{k})g(k)=\sum_{k|m}\sum _{d|\frac{m}{k}}\mu (d)g(k)=\sum_{k|m}g(k)*[\frac{m}{k}=1]=g(m)$\par
+~\\
+13 $n$的每个质因子个数都是1.（1）$n_{p}\leq 1$ (2) $\mu (n)\neq 0$ \par
+~\\
+14 $k>0$时两个都成立。\par
+~\\
+15 很明显5不是任何$e_{n}$的因子。首先对于模5来说，$e_{1}=2,e_{n}=e_{n-1}^{2}-e_{n}+1$,所以这个模的结果依次是2,3,2,3,不会出现0.\par
+~\\
+16 $\frac{1}{e_{1}}=\frac{1}{2},\frac{1}{e_{1}}+\frac{1}{e_{2}}=\frac{5}{6},\frac{1}{e_{1}}+\frac{1}{e_{2}}+\frac{1}{e_{3}}=\frac{41}{42}$，由此猜测$\sum_{i=1}^{k}\frac{1}{e_{i}}=\frac{e_{k+1}-2}{e_{k+1}-1}$\par
+~\\
+假设前$n$项都成立，即$\sum_{i=1}^{n}\frac{1}{e_{i}}=\frac{e_{n+1}-2}{e_{n+1}-1}$ \par
+~\\
+那么$\sum_{i=1}^{n+1}\frac{1}{e_{i}}=\frac{e_{n+1}-2}{e_{n+1}-1}+\frac{1}{e_{n+1}}=\frac{(e_{n+1}-1)e_{n+1}-1}{(e_{n+1}-1)e_{n+1}}=\frac{e_{n+2}-2}{e_{n+2}-1}$ \par
+~\\
+17 $Gcd(f_{m},f_{n})=Gcd(f_{m},(f_{n})mod(f_{m}))=Gcd(f_{m},2)=1$ \par
+~\\
+18 如果$n=rm$且$r$为奇数，那么有$2^{n}+1=(2^{m}+1)(2^{n-m}-2^{n-2m}+2^{n-3m}-...+1)$，比如$2^{12}+1=(2^{4}+1)(2^{8}-2^{4}+1)$ \par
+~\\
+ 
+\end{document}
