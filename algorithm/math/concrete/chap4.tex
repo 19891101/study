@@ -112,4 +112,14 @@ $L^{7}:\frac{7}{2},\frac{10}{3},\frac{13}{4},\frac{16}{5},\frac{19}{6},\frac{22}
 ~\\
 30 $[A,A+m)$中的数字$x$模$m$各不相同，所以$r$元组$((x)(mod)(m_{1}),(x)(mod)(m_{2}),..,(x)(mod)(m_{r}))$各不相同。所以总有一个元组是$((a_{1})(mod)(m_{1}),(a_{2})(mod)(m_{2}),..,(a_{r})(mod)(m_{r}))$ \par
 ~\\
+
+31 $(b)mod(d)=1\rightarrow (b^{m})mod(d)=((kd+1)^{m})mod(d)=1$\par
+所以$((a_{m}a_{m-1}...a_{1}a_{0})_{b}=\sum_{k=0}^{m}a_{k}b^{k})mod(d)=\sum_{k=0}^{m}a_{k}$ 也就是说，只要$(b)mod(d)=1$，那么一个$b$进制的数字能够被$d$整除当且仅当各位数字之和能够被$d$整除\par
+~\\
+32 假设$n\perp m$.那么下面两个集合相等. \par
+$\left \{ (kn)mod(m)|k\perp m ,1\le k <m\right \}=\left \{ k|k\perp m ,1\le k <m \right \}$\par
+所以将两边的$\varphi (m)$个数字乘起来，两边除以$\prod _{k\perp m ,0\le k <m}k$即可 \par
+~\\
+
+
 \end{document}
