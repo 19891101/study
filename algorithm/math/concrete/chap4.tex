@@ -120,6 +120,15 @@ $L^{7}:\frac{7}{2},\frac{10}{3},\frac{13}{4},\frac{16}{5},\frac{19}{6},\frac{22}
 $\left \{ (kn)mod(m)|k\perp m ,1\le k <m\right \}=\left \{ k|k\perp m ,1\le k <m \right \}$\par
 所以将两边的$\varphi (m)$个数字乘起来，两边除以$\prod _{k\perp m ,0\le k <m}k$即可 \par
 ~\\
+33 $h(1)=1$,假设$n\perp m$，那么$h(mn)=\sum_{d\perp mn}f(d)g(\frac{mn}{d})=\sum_{x\perp m,y\perp n}f(xy)g(\frac{m}{x}\frac{n}{y})=\sum_{x\perp m}\sum_{y\perp n}f(x)g(\frac{m}{x})f(y)g(\frac{n}{y})=h(n)h(m)$ \par
+~\\
+
+34 在公式4.56中，如果$d$不是整数，那么$f(d)=0$,所以$g(m)=\sum_{d|m}f(d)=\sum_{d|m}f(\frac{m}{d})=\sum_{d\geq 1}f(\frac{m}{d})$ \par
+~\\
+35 下面使用的符号与公式4.5相关的符号相同。 \par
+$m^{'}=\overline{m}-\left \lfloor \frac{n}{m} \right \rfloor\overline{r},n^{'}=\overline{r}\rightarrow I(m,n)=m^{'}=I(m,\overline{r})-\left \lfloor \frac{n}{m} \right \rfloor I(\overline{r},m)=I(m,(n)mod(m))-\left \lfloor \frac{n}{m} \right \rfloor I((n)mod(m),m),I(n,m)=n^{'}=(n)mod(m)$ \par
+$I(0,n)=0,I(m,0)=1$ \par
+~\\
 
 
 \end{document}
