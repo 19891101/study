@@ -129,6 +129,81 @@ $\left \{ (kn)mod(m)|k\perp m ,1\le k <m\right \}=\left \{ k|k\perp m ,1\le k <m
 $m^{'}=\overline{m}-\left \lfloor \frac{n}{m} \right \rfloor\overline{r},n^{'}=\overline{r}\rightarrow I(m,n)=m^{'}=I(m,\overline{r})-\left \lfloor \frac{n}{m} \right \rfloor I(\overline{r},m)=I(m,(n)mod(m))-\left \lfloor \frac{n}{m} \right \rfloor I((n)mod(m),m),I(n,m)=n^{'}=(n)mod(m)$ \par
 $I(0,n)=0,I(m,0)=1$ \par
 ~\\
+36 首先证明2不可以。\par
+假设2可以分解为两个非单位数乘积，即$2=(a+b\sqrt{10})(c+d\sqrt{10})=(ac+10bd)+(ad+bc)\sqrt{10}\rightarrow ac+10bd=2,ad+bc=0\rightarrow (a-b\sqrt{10})(c-d\sqrt{10})=(ac+10bd)-(ad+bc)\sqrt{10}=2\rightarrow (a^{2}-10b^{2})(c^{2}-10d^{2})=4$\par
+由于$|a^{2}-10b^{2}|\neq 1,|c^{2}-10d^{2}|\neq 1$,所以要么它们都为2或者都为-2. \par 由于任何整数的平方模10为0,1,4,5,6,9,所以不会是2.所以$(a^{2}-10b^{2})mod(10)=(a^{2})mod(10)\neq 2$。所以假设错误。\par
+3和$4\pm \sqrt{10}$的证明类似\par
+~\\
+37 令$a_{n}=2^{-n}ln(e_{n}-\frac{1}{2})=2^{-n}ln((e_{n-1}-\frac{1}{2})^{2}+\frac{1}{4})>2^{-n}ln((e_{n-1}-\frac{1}{2})^{2})=2^{-(n-1)}ln(e_{n-1}-\frac{1}{2})=a_{n-1}$ \par
+令$b_{n}=2^{-n}ln(e_{n}+\frac{1}{2})=2^{-n}ln(e_{n-1}^{2}-e_{n-1}+\frac{3}{2})<2^{-n}ln(e_{n-1}^{2}+e_{n-1}+\frac{1}{4})=2^{-n}ln((e_{n-1}+\frac{1}{2})^{2})=b_{n-1}$ \par
+所以$a_{n-1}<a_{n}<b_{n}<b_{n-1}$ \par
+另外$e_{n}=\left \lfloor E^{2^{n}}+\frac{1}{2} \right \rfloor\Leftrightarrow e_{n}\leq E^{2^{n}}+\frac{1}{2}<e_{n}+1\Leftrightarrow e_{n}-\frac{1}{2}\leq E^{2^{n}}<e_{n}+\frac{1}{2}\Leftrightarrow 2^{-n}ln(e_{n}-\frac{1}{2})\leq lnE<2^{-n}ln(e_{n}+\frac{1}{2})\Leftrightarrow a_{n}\leq lnE<b_{n}$ \par
+所以$E=\lim_{n\rightarrow oo}e^{a_{n}}$ \par
+~\\
+38 令$r=(n)mod(m)$，那么$a^{n}-b^{n}=(a^{m}-b^{m})(a^{n-m}+a^{n-2m}b^{m}+...+a^{r}b^{n-m-r})+b^{m\left \lfloor \frac{n}{m} \right \rfloor}(a^{r}-b^{r})$ \par
+所以$Gcd(a^{n}-b^{n},a^{m}-b^{m})=Gcd((a^{n}-b^{n})mod(a^{m}-b^{m}),a^{m}-b^{m})=Gcd(b^{m\left \lfloor \frac{n}{m} \right \rfloor}(a^{r}-b^{r}),a^{m}-b^{m})$ \par
+因为$a\perp b\rightarrow b^{m}\perp (a^{m}-b^{m})\rightarrow b^{m\left \lfloor \frac{n}{m} \right \rfloor}\perp (a^{m}-b^{m})$ \par
+所以$Gcd(b^{m\left \lfloor \frac{n}{m} \right \rfloor}(a^{r}-b^{r}),a^{m}-b^{m})=Gcd(a^{r}-b^{r},a^{m}-b^{m})$ \par
+一直这样下去可以得到$Gcd(a^{n}-b^{n},a^{m}-b^{m})=a^{Gcd(n,m)}-b^{Gcd(n,m)}$ \par
+~\\
+39 假设相等，设$m$的序列为$S_{m}=\left \{ m,a_{1},a_{2},...,a_{t},S(m) \right \}$,$m^{'}$的序列为$S_{m^{'}}=\left \{ m^{'},b_{1},b_{2},...,b_{u},S(m) \right \}$，令$\left \{ m,a_{1},a_{2},...,a_{t},S(m) \right \}\cap \left \{ m^{'},b_{1},b_{2},...,b_{u},S(m) \right \}=\left \{ c_{1},c_{2},..,c_{k},S_{m} \right \}=U$ \par
+所以$\frac{\prod_{x\in S_{m}}x\prod_{y\in S_{m^{'}}}y}{\prod_{x\in U}x^{2}}$也是完全平方数，所以这时候$S(m)$不是最小的 \par
+~\\
+40 这里的$p$是一个素数。 \par
+令$f(n)=\prod_{1\leq k \leq n,(k)mod(p)\ne 0}k=\frac{n!}{p^{\left \lfloor \frac{n}{p} \right \rfloor}\left \lfloor \frac{n}{p} \right \rfloor!}$ \par
+那么$\frac{n!}{p^{\xi _{p}(n!)}}=f(n)f(\left \lfloor \frac{n}{p} \right \rfloor)f(\left \lfloor \frac{n}{p^{2}} \right \rfloor)...$ \par
+而$f(n)\equiv a_{0}!((p-1)!)^{\left \lfloor \frac{n}{p} \right \rfloor}\equiv a_{0}!(-1)^{\left \lfloor \frac{n}{p} \right \rfloor}(mod(p))$ \par
+$f(\left \lfloor \frac{n}{p} \right \rfloor)\equiv a_{1}!(-1)^{\left \lfloor \frac{n}{p^{2}} \right \rfloor}(mod(p))$ \par
+$f(\left \lfloor \frac{n}{p^{2}} \right \rfloor)\equiv a_{2}!(-1)^{\left \lfloor \frac{n}{p^{3}} \right \rfloor}(mod(p))$ \par
+乘起来可以得到$\frac{n!}{p^{\xi _{p}(n!)}}\equiv (-1)^{\xi _{p}(n!)}a_{0}!a_{1}!..a_{m}!(mod(p))$ \par
+~\\
+41 (1)假设$n^{2}\equiv -1(mod(p))\rightarrow (n^{2})^{\frac{p-1}{2}}=n^{p-1}\equiv -1(mod(p))$ ,这是矛盾的 \par
+（２）$n=(\frac{p-1}{2})!$ \par
+比如$p=13$，那么$(1)mod(13)=(-12)mod(13),(2)mod(13)=(-11)mod(13),..,(6)mod(13)=(-7)mod(13),$ \par
+所以$n\equiv \left ( (-1)^{\frac{p-1}{2}}\prod_{1\leq k \leq \frac{p-1}{2}}(p-k)=\frac{(p-1)!}{n} \right )(mod(p))\rightarrow n^{2}\equiv \left ((p-1)!=1  \right )(mod(p))$ \par
+~\\
+42 A:$\frac{mn^{'}+m^{'}n}{nn{'}}$是最简分数 \par
+B: $n\perp n^{'} $ \par
+A$\rightarrow$ B: 假设$n,n^{'}$不互质，设$a=Gcd(n,n^{'}) > 1$,那么$n=pa,n^{'}=qa$,所以$mn^{'}+m^{'}n$和$nn^{'}$一定有公约数$a$.假设失败。所以一定有$n\perp n^{'}$ \par
+B$\rightarrow$ A:假设$a=Gcd(mn^{'}+m^{'}n,nn^{'})>1$,由于$n\perp n^{'} $,不妨设$n=pa,a\perp n^{'},a\perp m $.所以$a\perp mn^{'},a|m^{'}n$,所以$Gcd(mn^{'}+m^{'}n,a)=1$,假设失败。所以$A$成立
 
+~\\
+43 函数$\rho (n)$的递推公式在题目23中。\par
+(1)$n$为奇数时，$\begin{bmatrix} 0 &-1 \\  1 &1  \end{bmatrix}$=$L^{-1}R$。\par
+(2)$n$为偶数时，可以用数学归纳法证明$\begin{bmatrix}
+0 &-1 \\ 
+1 &2\rho (n)+1 
+\end{bmatrix}$=$R^{-\rho (n)}L^{-1}RL^{\rho(n)}$.不停用$\rho(2k)=\rho(k)+1$展开，前面的式子等价于证明$\begin{bmatrix}
+0 &-1 \\ 
+1 &2k+1 
+\end{bmatrix}=R^{-k}L^{-1}RL^{k}$.前面一项以及乘以这个矩阵后的样子是分别是$...L\underbrace{RR...R}_{\rho(n)}\rightarrow ...R\underbrace{LL...L}_{\rho(n)}$ \par
+~\\
+44 数字0.3155和0.3165的分数是$\frac{631}{2000},\frac{633}{2000}$。在Stern-Brocot中在这个区间中最简单的分数是$\frac{6}{19}$ \par
+~\\
+45 $x^{2}\equiv x(mod(10^{n}))\Leftrightarrow x(x-1)\equiv 0(mod(10^{n}))\Leftrightarrow x(x-1)\equiv 0(mod(2^{n})),x(x-1)\equiv 0(mod(5^{n}))\Leftrightarrow (x)mod(2^{n})=0,1,(x)mod(5^{n})=0,1$ \par
+所以满足条件的$x$最多有四个，其中两个是$0,1$，另外两个的形式为$t,10^{n}+1-t$ \par
+46　(1)假设$j^{'}j-k^{'}k=Gcd(j,k)$，那么有$n^{j^{'}j}=n^{k^{'}k}n^{Gcd(j,k)}$，所以如果$n^{j^{'}j}=pm+1,n^{k^{'}k}=qm+1\rightarrow n^{Gcd(j,k)}=rm+1$ \par
+(2)假设$n=pq$并且$p$是$n$的最小素因子（如果$n$为素数那么$p=n$）。所以$2^{p-1}\equiv 1(mod(p))$。\par
+如果$2^{n}\equiv 1(mod(n))\rightarrow 2^{n}\equiv 1(mod(p))$。(如果$2^{n}\not\equiv 1(mod(p))$,不妨设为$x$,那么$2^{n}=kp+x$.如果仍然有$2^{n}\equiv 1(mod(n)$,那么有$2^{n}=rn+1$,所以$(kp+x)-(rn+1)=(k-rq)p+(x-1)=0$,显然不成立)\par
+所以根据上面一个小题的结论,$2^{Gcd(p-1,n)}\equiv 1(mod(p))$。而由于$p$是$n$的最小素因子，所以$Gcd(p-1,n)=1$。这会导致错误。所以$2^{n}\not\equiv 1(mod(n))$ \par
+~\\
+47 $n^{m-1}\equiv 1(mod(m))\rightarrow n\perp m\rightarrow n^{t}\perp m\rightarrow \left ((n^{t})mod(m)  \right )\perp m,1\leq t <m$  \par
+假设：如果对于所有的$1\leq t <m$，$\left (n^{t}  \right )mod(m)$不是各不相同的，比如对$1\leq x < y < m$有$\left ((n^{x})mod(m)  \right )=\left ((n^{y})mod(m)  \right )$，那么$n^{y-x}\equiv 1(mod(m))$,其中$y-x<m-1$ \par
+根据题目46第一小题的结论，$n^{y-x}\equiv 1,n^{m-1}\equiv 1\rightarrow n^{Gcd(y-x,m-1)}\equiv 1$，而$Gcd(y-x,m-1)<m-1$.\par
+令$k=min(y-x,Gcd(y-x,m-1))$，那么$k$一定能整除$m-1$.所以存在一个素数$p$以及一个整数$q$满足$kq=\frac{m-1}{p}$,而$\left ( n^{\frac{m-1}{p}}=n^{kq} \right )\equiv 1$，而这与题目给出的$n^{\frac{m-1}{p}}\not\equiv 1$矛盾了。所以上面的假设错误。\par 
+对于所有的$1\leq t <m$，$\left (n^{t}  \right )mod(m)$各不相同，并且都与$m$互质，所以$1,2,3,...,m-1$都与$m$互质，所以$m$是素数 \par
+~\\
+48 将每个数字与其逆元相乘，得到1.所以可以不管这些数字。那么只剩下那些逆元是自己的数字，所以就是计算$\prod_{1\leq n < m,(n^{2})mod(m)=1}n$.根据$n^{2}\equiv 1(mod(m))$的解可以得到，当$m=4,p^{k},2p^{k}(p>２,k\geq 1)$答案为-１，否则为１ \par
+~\\
 
+49 (1)首先考虑$m<n$，此时答案为$\Phi (N)=\left (\sum_{k=1}^{N}\varphi (k)  \right )-1$,$m>n$也是这个，$m=n$时只有$m=n=1$成立，所以答案为$R(N)=2\Phi (N)-1$ \par
+(2)由公式4.62可以得到$R(N)=2\Phi (N)-1=-1+\sum_{d\geq 1}\mu (d)\left \lfloor \frac{N}{d} \right \rfloor\left \lfloor \frac{N}{d}+1 \right \rfloor=\sum_{d\geq 1}\mu (d)\left \lfloor \frac{N}{d} \right \rfloor^{2}+\left (\sum_{d\geq 1}\mu (d)\left \lfloor \frac{N}{d} \right \rfloor-1  \right )$ \par
+所以现在只需要满足$\sum_{d\geq 1}\mu (d)\left \lfloor \frac{N}{d} \right \rfloor=1$即可 \par
+在公式4.61中，令$f(x)=[x\geq 1]\rightarrow g(N)=\sum_{d\geq 1}[\frac{N}{d}\geq 1]=N\rightarrow \sum_{d\geq 1}\mu (d)\left \lfloor \frac{N}{d} \right \rfloor=\sum_{d\geq 1}\mu (d)g(\left \lfloor \frac{N}{d} \right \rfloor)=\sum _{d\geq 1}\mu (d)g(\frac{N}{d})=f(N)=1$ \par
+~\\
+50 (1) 设$f$是任意一个函数。$\prod_{0\leq k < m}f(k)=\prod_{d|m}\prod_{0\leq k < m}f(k)[d=Gcd(k,m)]=\prod_{d|m}\prod_{0\leq k < m}f(k)[\frac{k}{d}\perp \frac{m}{d}]=\prod_{d|m}\prod_{0\leq k < \frac{m}{d}}f(kd)[k\perp \frac{m}{d}]=\prod_{d|m}\prod_{0\leq k < d}f(k\frac{m}{d})[k\perp d]$  \par
+所以$z^{m}-1=\prod_{0\leq k < m}(z-\omega ^{k})=\prod_{d|m}\prod_{0\leq k < d,k\perp d}(z-\omega ^{\frac{km}{d}})=\prod_{d|m}\Psi _{m}(z)$ \par
+最后一步成立是因为$\omega^{\frac{km}{d}}=e^{\frac{2\pi i}{m}*\frac{km}{d}}=e^{\frac{2\pi i}{d}*k}$ \par
+(2)如果令$g(m)=z^{m}-1,f(m)=\Psi _{m}(z)$，也就是已知$g_{m}=\prod_{d|m}f(d)$而证明$f_{m}=\prod_{d|m}g(d)^{\mu (\frac{m}{d})}$，两边都取对数，就变成了公式4.56 \par
+~\\
 \end{document}
