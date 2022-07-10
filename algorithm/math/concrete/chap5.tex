@@ -1,0 +1,64 @@
+\documentclass[onecolumn]{article}
+\usepackage{xeCJK}
+\usepackage{amsmath}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\setlength{\parindent}{0pt}
+\renewcommand{\baselinestretch}{1.0}
+\lstset{
+	frame=tb, % draw a frame at the top and bottom of the code block
+	showstringspaces=false, % don't mark spaces in strings
+	numbers=left, % display line numbers on the left
+	commentstyle=\color{green}, % comment color
+	keywordstyle=\color{blue}, % keyword color
+	stringstyle=\color{red} % string color
+}
+\usepackage[a4paper,left=20mm,right=20mm,top=15mm,bottom=15mm]{geometry}  
+
+
+\begin{document}
+1 $11^{4}=(10+1)^{4}=C_{4}^{0}10^{0}+C_{4}^{1}10^{1}+C_{4}^{2}10^{2}+C_{4}^{3}10^{3}+C_{4}^{4}10^{4}=1+40+600+4000+10000=14641$ \par
+~\\
+2 $\frac{C_{b}^{k+1}}{C_{n}^{k}}=\frac{n-k}{k+1}$.令$\frac{n-k}{k+1}\ge 1$得到$k\le \frac{n+1}{2}$，所以$k \in [1, \frac{n+1}{2})$时，$C_{n}^{k+1}>C_{n}^{k}$.同理在大于$\frac{n}{2}$的时候逐渐减小。所以在中间位置最大。所以结论为：$n$为偶数时，最大值为$k=\frac{n}{2}$;奇数时，在$k=\frac{n-1}{2}$和$k=\frac{n+1}{2}$时最大 \par 
+~\\
+3 $\binom{n-1}{k-1}/\binom{n-1}{k}=\frac{k}{n-k}$\par
+$\binom{n}{k+1}/\binom{n}{k-1}=\frac{(n-k+1)(n-k)}{k(k+1)}$ \par
+$\binom{n+1}{k}/\binom{n+1}{k+1}=\frac{k+1}{n+1-k}$ \par
+相乘得1.随意相等 \par
+~\\
+4 当$k \ge 0$时，由公式5.14，令$r=-1$得到$\binom{-1}{k}=(-1)^{k}\binom{k-(-1)-1}{k}=(-1)^{k}$ ；$k<0$时结果为0 \par
+~\\
+5 $\binom{p}{k}=\frac{p(p-1)(p-2)..(p-k+1)}{k!}$是个整数。但是$k!$不能整除$p$，所以$p$可以整除$\binom{p}{k}$\par
+令$a=\binom{p-1}{k}=\frac{(p-1)(p-2)...(p-k)}{k!}$，所以$a*k!=(p-1)(p-2)..(p-k)$,两边模$p$得到$a*k!\equiv (-1)^{k}k!(\mod p)$,由于$k!$不能整除$p$，所以$a\mod p=(-1)^{k}$ \par
+~\\
+6 $\sum_{k\ge 0}\binom{n+k}{2k}\binom{2k}{k}\frac{(-1)^{k}}{k+1}$ \par
+$=\sum_{k\ge 0}\binom{n+k}{k}\binom{n}{k}\frac{(-1)^{k}}{k+1}$(根据公式5.21)  \par
+由于$\binom{n+1}{k+1}=\frac{n+1}{k+1}\binom{n}{k}$,所以$\binom{n}{k}\frac{1}{k+1}=\binom{n+1}{k+1}\frac{1}{n+1}$ \par
+那么上面的式子$=\frac{1}{n+1}\sum_{k\ge 0}\binom{n+k}{k}\binom{n+1}{k+1}(-1)^{k}$ \par
+$=\frac{1}{n+1}\sum_{k\ge 0}\binom{n+k}{n}\binom{n+1}{k+1}(-1)^{k}$ \par
+$=\frac{1}{n+1}\sum_{k}\binom{n+k}{n}\binom{n+1}{k+1}(-1)^{k}-\frac{1}{n+1}\binom{n-1}{n}\binom{n+1}{0}(-1)^{-1}$ (后面这一部分是$k=-1$,$k<-1$时都是0)\par
+$\frac{1}{n+1}\binom{n-1}{n}\binom{n+1}{0}(-1)^{-1}$仅当$n=0$时为-1，其他值结果都是0 \par
+对于$\frac{1}{n+1}\sum_{k}\binom{n+k}{n}\binom{n+1}{k+1}(-1)^{k}$可利用公式5.24,$(s,n,l,m)\rightarrow(n,n,n+1,1)$得到 \par
+$\frac{1}{n+1}\sum_{k}\binom{n+k}{n}\binom{n+1}{k+1}(-1)^{k}=\frac{1}{n+1}(-1)^{n+2}\binom{n-1}{-1}=0$ \par
+所以最后的答案是$[n=0]$ \par
+~\\ 
+7 当$k>0$时，$x^{\underline{-k}}=\frac{(-1)^{k}}{(-x-1)^{\underline{k}}}$ \par
+所以当$k>0$时，$r^{\underline{-k}}(r-\frac{1}{2})^{\underline{-k}}$
+$=\frac{(-1)^{k}}{(-r-1)(-r-2)..(-r-k)}\frac{(-1)^{k}}{(-r-\frac{1}{2})(-r-\frac{3}{2})..(-r-k+\frac{1}{2})}$ \par
+$=\frac{2^{2k}}{(-2r-1)(-2r-2)(-2r-3)...(-2r-2k)}$ \par
+同理，右侧$=\frac{(-1)^{2k}}{(-2r-1)^{2k}}\frac{1}{2^{-2k}}$ \par
+=$=\frac{2^{2k}}{(-2r-1)(-2r-2)...(-2r-2k)}$ \par
+因此，$k<0$时仍成立 \par
+~\\
+8 $\sum_{k}\binom{n}{k}(-1)^{k}(1-\frac{k}{n})^{n}$ \par
+$=\sum_{k}\binom{n}{k}(-1)^{-k}(1-\frac{k}{n})^{n}$ \par
+$=\sum_{k}\binom{n}{k}(-1)^{-k}(-1)^{n}(\frac{k}{n}-1)^{n}$ \par
+$=\sum_{k}\binom{n}{k}(-1)^{n-k}(\frac{k}{n}-1)^{n}$ \par
+令$f(k)=(\frac{k}{n}-1)^{n}$并在公式5.40中令$x=0$可以得到: \par
+$\Delta^{n}f(0)=\sum_{k}\binom{n}{k}(-1)^{n-k}f(k)=\sum_{k}\binom{n}{k}(-1)^{n-k}(\frac{k}{n}-1)^{n}$ \par
+所以结果就是$\Delta^{n}f(0)$ \par
+将$f(x)=(\frac{x}{n}-1)^{n}$展开成$f(x)=\sum_{d=0}^{d=n}a_{d}x^{d}$所以$a_{n}=n^{-n}$,再换算成牛顿级数的系数$c_{n}=n^{-n}n!$,所以$\Delta^{n}f(0)=c_{n}=n^{-n}n!$ \par
+$n$无穷大时，根据\href{https://baike.baidu.com/item/%E6%96%AF%E7%89%B9%E6%9E%97%E5%85%AC%E5%BC%8F/9583086}{斯特林近似}，得到$\frac{n!}{n^{n}}\approx \frac{\sqrt{2 \pi n}}{e^{n}}$ \par
+~\\
+\end{document}
