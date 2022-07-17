@@ -61,4 +61,48 @@ $\Delta^{n}f(0)=\sum_{k}\binom{n}{k}(-1)^{n-k}f(k)=\sum_{k}\binom{n}{k}(-1)^{n-k
 将$f(x)=(\frac{x}{n}-1)^{n}$展开成$f(x)=\sum_{d=0}^{d=n}a_{d}x^{d}$所以$a_{n}=n^{-n}$,再换算成牛顿级数的系数$c_{n}=n^{-n}n!$,所以$\Delta^{n}f(0)=c_{n}=n^{-n}n!$ \par
 $n$无穷大时，根据\href{https://baike.baidu.com/item/%E6%96%AF%E7%89%B9%E6%9E%97%E5%85%AC%E5%BC%8F/9583086}{斯特林近似}，得到$\frac{n!}{n^{n}}\approx \frac{\sqrt{2 \pi n}}{e^{n}}$ \par
 ~\\
+9 (超几何函数相关)不知道\par
+~\\
+10 (超几何函数相关)不知道\par
+~\\
+11 (超几何函数相关)不知道\par
+~\\
+12 (超几何函数相关)不知道\par
+~\\
+13 $P_{n}$中数字$k\in [1,n]$出现了$n+1-k$次 \par
+$Q_{n}$中数字$k\in [1,n]$出现了$k$次 \par
+将$\binom{n}{k}=\frac{n!}{k!(n-k)!}$代入$R_{n}$得到$R_{n}=\frac{(n!)^{n+1}}{(1!2!3!...n!)^{2}}$ \par
+所以分母是$P_{n}^{2}$,分子是$P_{n}Q_{n}$。因此$R_{n}=\frac{Q_{n}}{P_{n}}$ \par
+~\\
+14 $\sum_{k \le l}\binom{l-k}{m}\binom{s}{k-n}(-1)^{k}$ \par
+$=\sum_{k \le l}\binom{l-k}{l-k-m}\binom{s}{k-n}(-1)^{k}$ (这个地方$m>l-k$的项都是0)\par
+$=\sum_{k \le l}(-1)^{l-k-m}\binom{-m-1}{l-k-m}\binom{s}{k-n}(-1)^{k}$ \par
+$=\sum_{k \le l}\binom{-m-1}{l-k-m}\binom{s}{k-n}(-1)^{l-m}$ \par
+$=\sum_{k}\binom{-m-1}{l-k-m}\binom{s}{k-n}(-1)^{l-m}$ ($k>l$的项都是0， $(-1)^{l-m}$是常数)\par
+$=(-1)^{l-m}\binom{s-m-1}{l-m-n}$ \par
+$\sum_{-q \le k \le l}\binom{l-k}{m}\binom{q+k}{n}$\par
+$=\sum_{-q \le k \le l}\binom{l-k}{l-k-m}\binom{q+k}{q+k-n}$ \par
+$=\sum_{-q \le k \le l}(-1)^{l-k-m}\binom{-m-1}{l-k-m}(-1)^{q+k-n}\binom{-n-1}{q+k-n}$ \par
+$=\sum_{-q \le k \le l}\binom{-m-1}{l-k-m}\binom{-n-1}{q+k-n}(-1)^{l+q-m-n}$ \par
+$=\sum_{k}\binom{-m-1}{l-k-m}\binom{-n-1}{q+k-n}(-1)^{l+q-m-n}$ ($k>l$时前面一项为0，$k<-q$时后面一项为0)\par
+$=\binom{-m-n-2}{l+q-m-n}(-1)^{l+q-m-n}$ \par
+$=\binom{l+q+1}{l+q-m-n}$ \par
+$=\binom{l+q+1}{m+n+1}$ \par
+~\\
+15 (1)若$n$是奇数，那么$k$和$n-k$必是一个奇数一个偶数\par
+那么$\binom{n}{k}^{3}(-1)^{k}+\binom{n}{n-k}^{3}(-1)^{n-k}$ \par
+$=\binom{n}{k}^{3}((-1)^{k}+(-1)^{n-k})=0$ \par
+而$\binom{n}{k}$一共有偶数项，$[0,1,..,n]$,每两项得到0，所以和是0\par
+(2)若$n$时偶数，令$n=2m$，在公式5.29中，令$a=b=c=m$得到$\sum_{k}\binom{2m}{m+k}^{3}(-1)^{k}=\frac{(3m)!}{(m!)^{3}}$ \par
+令$k=-m+k$得到$\sum_{-m+k}\binom{2m}{k}^{3}(-1)^{-m+k}=\frac{(3m)!}{(m!)^{3}}$ \par
+两边同时乘以$(-1)^{m}$得到$\sum_{-m+k}\binom{2m}{k}^{3}(-1)^{k}=(-1)^{m}\frac{(3m)!}{(m!)^{3}}$ \par
+左侧$-m+k$取任意值，所以$\sum_{k}\binom{2m}{k}^{3}(-1)^{k}=(-1)^{m}\frac{(3m)!}{(m!)^{3}}$ \par
+~\\
+16 $\binom{2a}{a+k}\binom{2b}{(b+k)}\binom{2c}{c+k}$ \par
+$=\frac{(2a)!(2b)!(2c)!}{(a+k)!(a-k)!(b+k)!(b-k)!(c+k)!(c-k)!}$ \par
+$=\frac{(2a)!(2b)!(2c)!}{(a+b)!(b+c)!(c+a)!}\frac{(a+b)!(b+c)!(c+a)!}{(a+k)!(a-k)!(b+k)!(b-k)!(c+k)!(c-k)!}$ \par
+$=\frac{(2a)!(2b)!(2c)!}{(a+b)!(b+c)!(c+a)!}\binom{a+b}{a+k}\binom{b+c}{b+k}\binom{c+a}{c+k}$ \par
+所以由公式5.29得到$\sum_{k}\binom{2a}{a+k}\binom{2b}{(b+k)}\binom{2c}{c+k}(-1)^{k}$ \par
+$=\frac{(2a)!(2b)!(2c)!}{(a+b)!(b+c)!(c+a)!}\frac{(a+b+c)!}{a!b!c!}$   \par
+~\\
 \end{document}
